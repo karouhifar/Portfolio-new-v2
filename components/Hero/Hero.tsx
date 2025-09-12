@@ -1,74 +1,81 @@
+"use client";
 import React from "react";
 import { ArrowRight, Download } from "lucide-react";
+import Image from "next/image";
+import { Spotlight } from "../ui/Spotlight";
+import TextGenerateEffect from "../ui/textGenerateEffect";
+import MagicButton from "../ui/MagicButton";
+import { FaLocationArrow } from "react-icons/fa6";
+import hero from "@/public/images/hero-profile.png";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-bg via-brand-surface to-brand-bg" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-accent-1/20 rounded-full blur-3xl animate-float" />
-      <div
-        className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-brand-accent-2/20 rounded-full blur-3xl animate-float"
-        style={{ animationDelay: "2s" }}
-      />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
-          <div className="space-y-8 animate-fadeIn">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 bg-card/30 backdrop-blur-sm text-sm">
-                <span className="text-brand-accent-1">●</span>
-                <span>Cloud</span>
-                <span className="text-brand-accent-2">●</span>
-                <span>Data</span>
-                <span className="text-brand-primary">●</span>
-                <span>Web</span>
-              </div>
-            </div>
-
-            <h1 className="hero-text">
-              I build reliable data pipelines and cinematic web experiences.
-            </h1>
-
-            <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-              From E2E ingestion on Databricks to interactive 3D front-ends, I
-              ship fast, durable systems.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group">
-                Book a Call
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button>
-                <Download className="w-5 h-5" />
-                View Resume
-              </button>
-            </div>
-          </div>
-
-          {/* Right Column - 3D Visual */}
-          <div className="relative">
-            <div className="relative aspect-square max-w-lg mx-auto">
-              {/* 3D Image with Glow Effect */}
-              <div className="relative rounded-3xl overflow-hidden glow-border">
-                <img
-                  src={
-                    "https://thumbs.dreamstime.com/b/monkey-wearing-suit-tie-posing-business-portrait-businessman-formal-corporate-371978098.jpg"
-                  }
-                  alt="3D geometric visualization representing modern tech"
-                  className="w-full h-full object-cover animate-float"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-bg/30 to-transparent" />
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-brand-accent-1/20 rounded-full blur-xl animate-glow" />
-              <div
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-brand-accent-2/20 rounded-full blur-xl animate-glow"
-                style={{ animationDelay: "1s" }}
+    <section className="relative pb-20 pt-28 md:pt-36  bg-primary/60">
+      <div>
+        <Spotlight
+          className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
+          fill="white"
+        />
+        <Spotlight
+          className="h-[80vh] w-[50vw] top-10 left-full"
+          fill="purple"
+        />
+        <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
+      </div>
+      <div className="relative z-10">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            {/* Copy */}
+            <div className="text-center lg:text-left">
+              <TextGenerateEffect
+                words="Engineering Concepts From Ambitious Ideas"
+                className="text-balance text-[34px] leading-tight md:text-5xl md:leading-[1.1] lg:text-6xl"
               />
+
+              <p className="mx-auto mt-4 max-w-3xl text-sm/loose text-white md:text-base/loose lg:text-xl/loose">
+                Hi! I&apos;m Kamyab Rouhifar, a Cloud &amp; Full-stack
+                Application Developer.
+                <span className="block text-sm opacity-70">
+                  Toronto, Canada
+                </span>
+              </p>
+
+              <p className="mx-auto mt-2 max-w-[90%] text-center text-xs uppercase tracking-widest text-blue-100 opacity-80 lg:mx-0 lg:text-left">
+                Dynamic web application powered by Next.js
+              </p>
+
+              <div className="mt-6 flex justify-center lg:justify-start">
+                <a href="#about">
+                  <MagicButton
+                    title="Show my work"
+                    icon={<FaLocationArrow />}
+                    position="right"
+                  />
+                </a>
+              </div>
+            </div>
+
+            {/* Image */}
+            <div className="order-first lg:order-none">
+              <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-3xl  shadow-2xl lg:ml-auto lg:max-w-none lg:aspect-[1]">
+                {/* 
+                  Replace src with your image path.
+                  If using a remote image, add the domain to next.config.js images.domains.
+                */}
+                <Image
+                  src={hero}
+                  alt="Right-profile portrait of Kamyab Rouhifar"
+                  fill
+                  className="
+                  object-cover
+          w-full block rounded-2xl
+          [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]
+          [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]
+        "
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </div>
