@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-export async function fetcher<JSON = any>(
+export async function fetcher<JSON>(
   input: RequestInfo,
   init?: RequestInit
 ): Promise<JSON> {
@@ -476,9 +476,9 @@ export function rgbToHsl(
   b /= 255;
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
-  let h: number = 0,
-    s: number = 0,
-    l: number = (max + min) / 2;
+  let h: number = 0;
+  let s: number = 0;
+  const l: number = (max + min) / 2;
   if (max !== min) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
