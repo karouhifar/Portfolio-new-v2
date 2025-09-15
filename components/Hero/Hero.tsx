@@ -23,7 +23,7 @@ const Hero = () => {
         <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
       </div>
       <div className="relative z-10">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             {/* Copy */}
             <div className="text-center lg:text-left">
