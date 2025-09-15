@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "title": "DreamDigital",
+    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "technologies": [
+      {
+        "title": "JavaScript",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Next.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "MUI",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Chart.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Leaflet",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      }
+    ],
+    "description": "DreamDigital is an expert at assisting local businesses in North America with tailored IT solutions. We specialize in all-things AI, automation tools, web development, digital branding – and everything you can imagine. (It is a side business that I am working for)"
+  },
+  {
+    "id": 2,
+    "title": "YouTube Analyzer",
+    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "technologies": [
+      {
+        "title": "JavaScript",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Next.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "MUI",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Chart.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Leaflet",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      }
+    ],
+    "description": "The YouTube Analyzer extension leverages OpenAI’s fine-tuning AI models to provide detailed analysis of YouTube video and comments summaries. It offers content creators valuable insights into audience engagement and sentiment, enabling them to optimize their content strategy based on deep, data-driven understanding."
+  },
+  {
+    "id": 3,
+    "title": "MediaKits",
+    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "technologies": [
+      {
+        "title": "JavaScript",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Next.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "MUI",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Chart.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Leaflet",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      }
+    ],
+    "description": "A media kit is a collection of promotional materials that is used to provide information about an organization or influencer to the media. It typically includes information such as company background, key contacts, press releases, product or service descriptions, and high-resolution images or videos. Media kits are often used by public relations professionals, marketers, and influencers to promote their company or brand to the media, and to provide journalists and other members of the media with the information they need to write stories or create content about the company or brand."
+  },
+  {
+    "id": 4,
+    "title": "Covid-19 Tracker Website",
+    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "technologies": [
+      {
+        "title": "JavaScript",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Next.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "MUI",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Chart.js",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      },
+      {
+        "title": "Leaflet",
+        "url": "https://static.thenounproject.com/png/2616532-200.png"
+      }
+    ],
+    "description": "A COVID-19 Tracker website is a digital platform that provides real-time information and updates on the ongoing COVID-19 pandemic. These websites typically gather data from an Open Disease Data API (disease.sh) to provide the most up-to-date and accurate information on the number of confirmed cases, deaths, and recoveries."
+  }
+]

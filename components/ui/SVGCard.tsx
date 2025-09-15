@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React, { HTMLAttributes, useId } from "react";
 
 type Dir = "left" | "right" | undefined;
@@ -42,55 +43,56 @@ const SVGCard: React.FC<{
       ? SHAPES.right
       : SHAPES.center;
   const { w, h, d, evenOdd } = shape;
-
   return (
-    <svg
-      className={`${className ?? ""}`}
-      viewBox={`0 0 ${w} ${h}`}
-      preserveAspectRatio="xMidYMid meet"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Background shape */}
-      <path
-        d={d}
-        fill="#1D1D3B"
-        fillRule={evenOdd ? "evenodd" : undefined}
-        clipRule={evenOdd ? "evenodd" : undefined}
-      />
-      {/* Soft inner outline (replaces mask hack) */}
-      <path d={d} fill="none" stroke="white" strokeOpacity={0.06} />
-
-      {/* ClipPath so the foreignObject content respects the curved cutouts */}
-      <defs>
-        <clipPath id={CLIP_ID}>
-          <path
-            d={d}
-            fill="white"
-            fillRule={evenOdd ? "evenodd" : undefined}
-            clipRule={evenOdd ? "evenodd" : undefined}
-          />
-        </clipPath>
-      </defs>
-
-      {/* HTML/React content layer */}
-      <foreignObject
-        x="0"
-        y="0"
-        width={w}
-        height={h}
-        clipPath={`url(#${CLIP_ID})`}
+    <div className={cn("relative w-full h-full", className)}>
+      <svg
+        className={cn("absolute inset-0")}
+        viewBox={`0 0 ${w} ${h}`}
+        preserveAspectRatio="xMidYMid meet"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <div
-          {...({
-            xmlns: "http://www.w3.org/1999/xhtml",
-          } as HTMLAttributes<HTMLDivElement>)}
-          className="flex h-full w-full items-center justify-center bg-transparent text-white"
+        {/* Background shape */}
+        <path
+          d={d}
+          fill="#1D1D3B"
+          fillRule={evenOdd ? "evenodd" : undefined}
+          clipRule={evenOdd ? "evenodd" : undefined}
+        />
+        {/* Soft inner outline (replaces mask hack) */}
+        <path d={d} fill="none" stroke="white" strokeOpacity={0.06} />
+
+        {/* ClipPath so the foreignObject content respects the curved cutouts */}
+        <defs>
+          <clipPath id={CLIP_ID}>
+            <path
+              d={d}
+              fill="white"
+              fillRule={evenOdd ? "evenodd" : undefined}
+              clipRule={evenOdd ? "evenodd" : undefined}
+            />
+          </clipPath>
+        </defs>
+
+        {/* HTML/React content layer */}
+        <foreignObject
+          x="0"
+          y="0"
+          width={w}
+          height={h}
+          clipPath={`url(#${CLIP_ID})`}
         >
-          {children ?? <p className="opacity-70">Hello from foreignObject</p>}
-        </div>
-      </foreignObject>
-    </svg>
+          <div
+            {...({
+              xmlns: "http://www.w3.org/1999/xhtml",
+            } as HTMLAttributes<HTMLDivElement>)}
+            className="flex h-full w-full items-center justify-center bg-transparent text-white"
+          >
+            {children ?? <p className="opacity-70">Hello from foreignObject</p>}
+          </div>
+        </foreignObject>
+      </svg>
+    </div>
   );
 };
 

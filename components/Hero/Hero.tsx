@@ -10,7 +10,7 @@ import hero from "@/public/images/hero-profile.png";
 
 const Hero = () => {
   return (
-    <section className="relative pb-20 pt-28 md:pt-36  bg-primary/60">
+    <section className="relative pb-20 pt-28 md:pt-36 bg-primary/60 w-full">
       <div>
         <Spotlight
           className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"

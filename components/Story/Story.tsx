@@ -28,13 +28,13 @@ const Card: React.FC<
   </div>
 );
 
-const PromptPalLayout: React.FC = () => {
+const Story: React.FC = () => {
   return (
-    <main className="min-h-screen w-full bg-[#0b0e1a] px-4 py-6 sm:px-6 md:px-8">
-      <div className="mx-auto max-w-6xl">
+    <div className="w-full py-6 md:h-[57rem]">
+      <div className="mx-auto max-w-7xl">
         {/* The grid */}
         <div
-          className="relative grid gap-6 md:[grid-template-columns:repeat(12,minmax(0,1fr))] md:[grid-template-rows:repeat(3,200px)]"
+          className="relative grid gap-10 md:[grid-template-columns:repeat(12,minmax(0,1fr))] md:[grid-template-rows:repeat(3,200px)]"
           // Control hub size and border thickness with CSS vars for easy tuning
           style={
             {
@@ -45,41 +45,39 @@ const PromptPalLayout: React.FC = () => {
           }
         >
           {/* Left tall (spans two rows) */}
-          <Card className="h-[200px] md:col-span-3 md:row-span-2" />
+          <Card className="h-48 md:col-span-3 md:row-span-2 md:h-full" />
 
           {/* Top center wide */}
           <Card
             inverted
-            width={556}
-            height={396}
-            className="h-[200px] md:col-span-6 md:row-span-2"
+            className="h-48 md:col-span-6 md:row-span-2 md:h-full"
           />
 
           {/* Top-right small */}
-          <Card className="h-[200px] md:col-span-3 md:row-span-1" />
+          <Card className="h-48 md:col-span-3 md:row-span-1 md:h-full" />
 
           {/* Mid-right small */}
-          <Card className="hidden h-[200px] md:col-start-10 md:col-end-13 md:block md:row-start-2 md:row-end-3" />
+          <Card className="h-48 md:col-start-10 md:col-end-13 md:block md:row-start-2 md:row-end-3 md:h-full" />
 
           {/* Bottom left wide */}
           <Card
             inverted
             direction="right"
-            className="h-[200px] md:col-start-1 md:col-end-7 md:row-start-3 md:row-end-4"
+            className="h-48  md:col-start-1 md:col-end-7 md:row-start-3 md:row-end-4 md:h-full"
           />
 
           {/* Bottom right wide */}
           <Card
             inverted
             direction="left"
-            className="h-[200px] md:col-start-7 md:col-end-13 md:row-start-3 md:row-end-4"
+            className="h-48 md:col-start-7 md:col-end-13 md:row-start-3 md:row-end-4 md:h-full"
           />
 
           {/* CENTRAL HUB (creates the inverted-radius illusion by sitting above the cards) */}
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
-export default PromptPalLayout;
+export default Story;

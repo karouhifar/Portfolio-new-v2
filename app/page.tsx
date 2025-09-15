@@ -5,18 +5,20 @@ import React from "react";
 import { NavBarSizeable } from "@/components/NavBarSizeable/NavBarSizeable";
 import { BentoGridLayout } from "@/components/BentoGridLayout/BentoGridLayout";
 import Footer from "@/components/Footer/Footer";
-import PromptPalLayout from "@/components/demo/Demo";
+import Story from "@/components/Story/Story";
+import Projects from "@/components/Projects/Projects";
 
 export default function Home() {
   return (
-    <React.Fragment>
+    <div className="overflow-x-hidden">
       <NavBarSizeable>
         <div className="w-full max-w-7xl h-auto">
           <Hero />
-          <PromptPalLayout />
+          <Story />
+          <Projects />
         </div>
       </NavBarSizeable>
       <Footer />
-    </React.Fragment>
+    </div>
   );
 }
