@@ -24,17 +24,15 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden">
+    <footer className="relative">
       {/* Background: deep navy + grid + soft glow */}
       <div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -top-10 -z-10"
         style={{
           backgroundColor: "#0b0d17",
           backgroundImage: `
             radial-gradient(900px 300px at 50% -10%, rgba(139, 92, 246, 0.18), transparent 60%),
-            radial-gradient(600px 240px at 18% 78%, rgba(59, 130, 246, 0.14), transparent 60%),
-            linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
+            radial-gradient(600px 240px at 18% 78%, rgba(59, 130, 246, 0.14), transparent 60%)
           `,
           backgroundSize: "100% 100%, 100% 100%, 64px 64px, 64px 64px",
           backgroundPosition: "center",
