@@ -6,6 +6,8 @@ import { ReactNode } from "react";
 import { FaGithub, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { HiPhoneArrowUpRight } from "react-icons/hi2";
 import type { IconType } from "react-icons";
+import Image from "next/image";
+import logo from "@/public/images/logo.png";
 
 type Social = {
   href: string;
@@ -39,7 +41,14 @@ export default function Footer() {
         }}
       />
 
-      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 py-28 text-center md:py-32">
+      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 py-28 text-center md:py-10">
+        <Image
+          src={logo}
+          alt="Kamyab Rouhifar"
+          width={180}
+          height={40}
+          className=" mb-8"
+        />
         <h2 className="mb-4 text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
           Ready to take{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-violet-400 bg-clip-text text-transparent">

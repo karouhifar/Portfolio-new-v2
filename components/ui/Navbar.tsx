@@ -9,7 +9,8 @@ import {
 import React, { useRef, useState } from "react";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { RxCross2 } from "react-icons/rx";
-
+import logo from "@/public/images/logo.png";
+import Image from "next/image";
 interface NavbarProps {
   children: React.ReactNode;
   className?: string;
@@ -194,7 +195,6 @@ export const MobileNavMenu = ({
   children,
   className,
   isOpen,
-  onClose,
 }: MobileNavMenuProps) => {
   return (
     <AnimatePresence>
@@ -235,13 +235,10 @@ export const NavbarLogo = () => {
       href="#"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <img
-        src="https://assets.aceternity.com/logo-dark.png"
-        alt="logo"
-        width={30}
-        height={30}
-      />
-      <span className="font-medium text-black dark:text-white">Startup</span>
+      <Image src={logo} alt="logo" width={30} height={30} />
+      <span className="font-medium text-black dark:text-white">
+        Kamyab Portfolio
+      </span>
     </a>
   );
 };
