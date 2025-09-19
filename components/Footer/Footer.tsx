@@ -65,7 +65,8 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 pb-8">
         <p className="text-sm text-white/60">
-          Copyright ©{year} <span className="text-white/80">John Doe</span>
+          Copyright ©{year}{" "}
+          <span className="text-white/80">Kamyab Rouhifar</span>
         </p>
 
         <div className="flex items-center gap-3">

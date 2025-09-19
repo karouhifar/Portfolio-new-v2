@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #04041b;
   --foreground: #171717;
-  --primary: #04041b;
-  --accent: #00ffff;
+  --primary: #06064a;
+  --secondary: #1d062e;
+  --accent: #fff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -36,7 +38,7 @@
 } */
 
 body {
-  background: var(--primary);
+  background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;

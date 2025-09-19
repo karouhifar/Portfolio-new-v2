@@ -16,7 +16,7 @@ const Projects = () => {
         {projects.map((item) => (
           <MagicCard
             key={item.id}
-            containerClassName="col-span-1 h-full bg-primary min-h-[500px] lg:min-h-[300px]"
+            containerClassName="col-span-1 h-full bg-background min-h-[500px] lg:min-h-[300px]"
             className=""
           >
             <div className="relative flex items-center justify-center sm:w-full w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">

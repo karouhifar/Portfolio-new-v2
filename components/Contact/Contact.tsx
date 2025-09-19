@@ -1,13 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
 import { IconType } from "react-icons";
-import { IoMdMail } from "react-icons/io";
-import { MagicCard } from "../ui/MagicCard";
+import GlassEffect from "../ui/GlassEffect";
+import CNtower from "@/public/images/cntower.png";
+import Image from "next/image";
+import { MdOutlineEmail } from "react-icons/md";
 
 type Social = { label: string; href: string; Icon: IconType };
+
+interface Shape {
+  color: string;
+  size: number;
+  x: number;
+  y: number;
+  initialScale: number;
+  initialRotate: number;
+  duration: number;
+  delay: number;
+}
 
 const socials: Social[] = [
   { label: "Facebook", href: "#", Icon: FaFacebook },
@@ -16,8 +29,8 @@ const socials: Social[] = [
 ];
 
 const fieldBase =
-  "w-full rounded-xl border border-neutral-200/70 bg-white px-4 py-3 text-[15px] leading-6 text-neutral-800 placeholder:text-neutral-400 outline-none transition shadow-sm focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10";
-const labelBase = "mb-2 block text-sm font-medium text-neutral-700";
+  "w-full px-4 py-3 bg-indigo-900/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400/50 transition-colors";
+const labelBase = "block mb-2 text-sm font-medium text-gray-900 text-white";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -45,14 +58,93 @@ export default function ContactSection({
     setStatus("success");
   }
 
+  const AnimatedShape: React.FC<{ shape: Shape }> = ({ shape }) => {
+    const { color, size, x, y, initialScale, initialRotate, duration, delay } =
+      shape;
+
+    const getShapeStyles = () => {
+      const baseStyles = {
+        width: `${size}px`,
+        height: `${size}px`,
+        position: "absolute" as const,
+        left: `${x}%`,
+        top: `${y}%`,
+        filter: "blur(40px)",
+        zIndex: -1,
+      };
+      return { ...baseStyles, backgroundColor: color };
+    };
+
+    return (
+      <motion.div
+        style={getShapeStyles()}
+        initial={{ scale: initialScale, rotate: initialRotate }}
+        whileInView={{
+          y: [0, 30, -30, 0],
+          x: [0, 20, -20, 0],
+          scale: [
+            initialScale,
+            initialScale * 1.2,
+            initialScale * 0.8,
+            initialScale,
+          ],
+          rotate: [
+            initialRotate,
+            initialRotate + 20,
+            initialRotate - 20,
+            initialRotate,
+          ],
+          opacity: 1,
+        }}
+        viewport={{ once: true, amount: 0.8 }}
+        transition={{
+          duration,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "mirror",
+          delay,
+        }}
+      />
+    );
+  };
+
   return (
     <section className="mx-auto my-10 w-full md:my-16">
+      {/* Background: deep navy + grid + soft glow */}
+      <div className="absolute inset-0 -z-0">
+        <AnimatePresence>
+          <AnimatedShape
+            shape={{
+              color: "rgba(59, 130, 246, 0.5)",
+              size: 150,
+              x: 0,
+              y: -15,
+              initialScale: 1,
+              initialRotate: 45,
+              duration: 20,
+              delay: 0,
+            }}
+          />
+          <AnimatedShape
+            shape={{
+              color: "rgba(139, 92, 246, 0.3)",
+              size: 120,
+              x: 95,
+              y: 45,
+              initialScale: 0.7,
+              initialRotate: 120,
+              duration: 15,
+              delay: 0,
+            }}
+          />
+        </AnimatePresence>
+      </div>
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="relative overflow-hidden rounded-3xl border-2 border-white/[0.1] group/bento hover:shadow-xl shadow-input dark:shadow-none justify-between flex flex-col space-y-4 transition-[border-color] duration-300">
+        <GlassEffect>
           <div className="h-full ">
             <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:divide-x md:divide-neutral-200/[0.2] z-50">
               {/* Left column */}
@@ -78,29 +170,28 @@ export default function ContactSection({
                 <div className=""></div>
                 <div className="mt-10 space-y-8">
                   {/* Email */}
-                  <div>
-                    <h3 className="text-lg font-semibold ">Email</h3>
-                    <div className="mt-4 flex items-center gap-4">
-                      <div className="grid h-14 w-14 place-items-center rounded-full border border-neutral-200 bg-white">
-                        <IoMdMail className="h-6 w-6 " />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                    className="bg-purple-800/10 backdrop-blur-sm border border-purple-600/30 rounded-2xl p-6 mb-8 max-w-md"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-purple-600/40 rounded-xl flex items-center justify-center">
+                        <MdOutlineEmail className="w-6 h-6 text-white" />
                       </div>
-                      <div className="min-w-0">
-                        <p className="text-sm ">Mail</p>
-                        <a
-                          href={`mailto:${email}`}
-                          className="truncate text-base font-medium text-blue-600 hover:underline"
-                        >
-                          {email}
-                        </a>
+                      <div>
+                        <p className="text-white font-semibold text-lg">
+                          Email
+                        </p>
+                        <p className="text-gray-300">karouhifar@gmail.com</p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Socials */}
                   <div>
-                    <h3 className="text-lg font-semibold text-neutral-900">
-                      Socials
-                    </h3>
+                    <h3 className="text-lg font-semibold">Socials</h3>
                     <div className="mt-4 flex gap-5">
                       {socials.map(({ Icon, label, href }) => (
                         <motion.a
@@ -188,7 +279,7 @@ export default function ContactSection({
                   <motion.textarea
                     id="message"
                     name="message"
-                    rows={8}
+                    rows={5}
                     placeholder="Write your message..."
                     className={fieldBase + " resize-y"}
                     whileFocus={{
@@ -200,9 +291,9 @@ export default function ContactSection({
                 {/* Submit */}
                 <motion.button
                   type="submit"
-                  whileHover={{ y: -1 }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 1.2 }}
-                  className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-6 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-blue-600/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 md:w-auto"
+                  className="inline-flex self-end w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-purple-600  px-6 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-blue-600/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 md:w-auto"
                   disabled={status === "submitting" || status === "success"}
                 >
                   {status === "success"
@@ -214,7 +305,17 @@ export default function ContactSection({
               </motion.form>
             </div>
           </div>
-        </div>
+          <div className="absolute bottom-0 left-0 hidden md:block -z-10 w-full overflow-hidden rounded-b-3xl">
+            <Image
+              src={CNtower}
+              alt="Contact Illustration"
+              width={370}
+              height={370}
+              className="mt-10 hidden md:block"
+              priority
+            />
+          </div>
+        </GlassEffect>
       </motion.div>
     </section>
   );
