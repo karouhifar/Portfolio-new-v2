@@ -12,7 +12,6 @@ const Story: React.FC = () => {
           // Control hub size and border thickness with CSS vars for easy tuning
           style={
             {
-              // @ts-expect-errore custom properties
               "--hub-size": "180px",
               "--hub-ring": "14px",
             } as React.CSSProperties
