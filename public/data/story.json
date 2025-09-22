@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Automated Content Creation",
+    "description": "AI-powered content generation for dynamic websites, making content management seamless and efficient.",
+    "className": "lg:col-span-2",
+    "header": "SkeletonOne"
+  },
+  {
+    "id": 2,
+    "title": "Interactive Globe Visualization",
+    "description": "Display complex geographical data on a beautiful, interactive 3D globe.",
+    "className": "lg:col-span-1",
+    "header": "Globe"
+  },
+  {
+    "id": 3,
+    "title": "Real-time Collaboration",
+    "description": "Enable seamless teamwork with features designed for real-time interaction and updates.",
+    "className": "lg:col-span-1",
+    "header": "SkeletonTwo"
+  },
+  {
+    "id": 4,
+    "title": "Modern Development Stack",
+    "description": "Leveraging the latest technologies like Next.js and TypeScript for optimal performance and scalability.",
+    "className": "lg:col-span-1",
+    "header": "SkeletonFour"
+  },
+  {
+    "id": 5,
+    "title": "Cloud-Powered Solutions",
+    "description": "Building reliable and scalable applications using modern cloud infrastructure.",
+    "className": "lg:col-span-2",
+    "header": "SkeletonFive"
+  },
+  {
+    "id": 6,
+    "title": "Data-Driven Dashboards",
+    "description": "Understand your data at a glance with intuitive and customizable dashboards.",
+    "className": "lg:col-span-3",
+    "header": "SkeletonThree"
+  }
+]

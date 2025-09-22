@@ -3,7 +3,7 @@ import Image from "next/image";
 import data from "@/public/data/marquee-images.json";
 import React from "react";
 import { NavBarSizeable } from "@/components/NavBarSizeable/NavBarSizeable";
-import { BentoGridLayout } from "@/components/BentoGridLayout/BentoGridLayout";
+
 import Footer from "@/components/Footer/Footer";
 import Story from "@/components/Story/Story";
 import Projects from "@/components/Projects/Projects";

@@ -1,8 +1,57 @@
-import React from "react";
+import React, { useMemo } from "react";
 import SVGCard from "../ui/SVGCard";
 import { FadeUp } from "../ui/FadeUp";
+import { IconCloud } from "../ui/IconCloud";
+import { SiJavascript, SiNodedotjs, SiReact } from "react-icons/si";
+import { FaAws } from "react-icons/fa6";
+import { VscAzure } from "react-icons/vsc";
+import { BentoCard, BentoGrid } from "../ui/bentoGrid";
+import { MapPin } from "lucide-react";
+
+const slugs = [
+  "databricks",
+  "tailwindcss",
+  "apachehive",
+  "python",
+  "django",
+  "dotnet",
+  "typescript",
+  "javascript",
+  "dart",
+  "java",
+  "react",
+  "flutter",
+  "android",
+  "html5",
+  "css3",
+  "nodedotjs",
+  "express",
+  "nextdotjs",
+  "prisma",
+  "amazonaws",
+  "postgresql",
+  "firebase",
+  "nginx",
+  "vercel",
+  "testinglibrary",
+  "jest",
+  "cypress",
+  "docker",
+  "git",
+  "jira",
+  "github",
+  "gitlab",
+  "visualstudiocode",
+  "androidstudio",
+  "sonarqube",
+  "figma",
+];
 
 const Story: React.FC = () => {
+  const images = useMemo(
+    () => slugs.map((slug) => `https://cdn.simpleicons.org/${slug}/ffffffA6`),
+    []
+  );
   return (
     <div className="w-full py-6 md:h-[57rem]">
       <div className="mx-auto max-w-7xl">
@@ -22,7 +71,7 @@ const Story: React.FC = () => {
             <div className="rounded-3xl h-48 md:h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]" />
           </FadeUp>
           {/* Top center wide */}
-          <FadeUp number={2} className="md:col-span-6 md:row-span-2">
+          <FadeUp number={2} className="md:col-span-6 md:row-span-1">
             <SVGCard className="h-48  md:h-full" />
           </FadeUp>
           {/* Top-right small */}
@@ -36,22 +85,37 @@ const Story: React.FC = () => {
           >
             <div className="h-48  md:block  md:h-full rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]" />
           </FadeUp>
+          <FadeUp
+            number={6}
+            className="md:col-start-5 md:col-end-9 md:row-start-2 md:row-end-4"
+          >
+            {/* CENTRAL HUB (creates the inverted-radius illusion by sitting above the cards) */}
+            <div className="relative flex size-full max-w-lg items-center justify-center rounded-lg">
+              <IconCloud images={images} />
+            </div>
+          </FadeUp>
           {/* Bottom left wide */}
           <FadeUp
             number={5}
             className="md:col-start-1 md:col-end-7 md:row-start-3 md:row-end-4 "
           >
-            <SVGCard direction="right" className="h-48  md:h-full" />
+            <SVGCard
+              title={"Located at North America Time Zone"}
+              direction="right"
+              className="h-48  md:h-full"
+            />
           </FadeUp>
           {/* Bottom right wide */}
           <FadeUp
             number={6}
             className="md:col-start-7 md:col-end-13 md:row-start-3 md:row-end-4"
           >
-            <SVGCard direction="left" className="h-48  md:h-full" />
+            <SVGCard
+              title={"Located at North America Time Zone"}
+              direction="left"
+              className="h-48  md:h-full"
+            />
           </FadeUp>
-
-          {/* CENTRAL HUB (creates the inverted-radius illusion by sitting above the cards) */}
         </div>
       </div>
     </div>
