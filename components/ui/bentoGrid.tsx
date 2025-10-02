@@ -16,6 +16,8 @@ interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
   description: string;
   href: string;
   cta: string;
+  title: string;
+  direction?: "left" | "right" | "center";
 }
 
 const BentoGrid = ({ children, className, ...props }: BentoGridProps) => {
@@ -32,6 +34,8 @@ const BentoCard = ({
   background,
   Icon,
   description,
+  title,
+  direction,
   href,
   cta,
   ...props
@@ -48,13 +52,21 @@ const BentoCard = ({
     )}
     {...props}
   >
+    <p
+      className={cn(
+        "font-sans text-lg lg:text-2xl max-w-96 font-bold z-10 py-5  text-center",
+        direction == "left" ? "self-end pl-5" : "self-start pr-5"
+      )}
+    >
+      {title}
+    </p>
     <div>{background}</div>
-    <div className="p-4">
+    <div className="p-4 w-full max-w-xs pt-10">
       <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
         <Icon className="h-12 w-12 origin-left transform-gpu text-neutral-400 transition-all duration-300 ease-in-out group-hover:scale-75" />
 
-        <p className="max-w-lg text-neutral-400">{description}</p>
-        <h3 className={`font-sans text-lg lg:text-3xl max-w-96 font-bold z-10`}>
+        <p className=" max-w-lg text-neutral-200">{description}</p>
+        <h3 className={`font-sans text-lg lg:text-2xl max-w-96 font-bold z-10`}>
           {name}
         </h3>
       </div>

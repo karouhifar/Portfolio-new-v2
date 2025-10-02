@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+"use client";
+import React, { useMemo, useState } from "react";
 import SVGCard from "../ui/SVGCard";
 import { FadeUp } from "../ui/FadeUp";
 import { IconCloud } from "../ui/IconCloud";
@@ -7,6 +8,9 @@ import { FaAws } from "react-icons/fa6";
 import { VscAzure } from "react-icons/vsc";
 import { BentoCard, BentoGrid } from "../ui/bentoGrid";
 import { MapPin } from "lucide-react";
+import { BackgroundGradientAnimation } from "../ui/GradientBackground";
+import MagicButton from "../ui/MagicButton";
+import { IoCopyOutline } from "react-icons/io5";
 
 const slugs = [
   "databricks",
@@ -48,6 +52,7 @@ const slugs = [
 ];
 
 const Story: React.FC = () => {
+  const [copied, setCopied] = useState(false);
   const images = useMemo(
     () => slugs.map((slug) => `https://cdn.simpleicons.org/${slug}/ffffffA6`),
     []
@@ -83,7 +88,31 @@ const Story: React.FC = () => {
             number={4}
             className="md:col-start-10 md:col-end-13 md:row-start-2 md:row-end-3"
           >
-            <div className="h-48  md:block  md:h-full rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]" />
+            <div className="relative h-48 flex flex-col ">
+              <BackgroundGradientAnimation>
+                <p
+                  className={`font-sans text-lg lg:text-xl p-5 font-bold  text-white text-center`}
+                >
+                  Do you want to start a project together?
+                </p>
+                <div className="flex justify-center z-10 ">
+                  <MagicButton
+                    title={
+                      copied ? "Email is Copied!" : "Copy my email address"
+                    }
+                    icon={<IoCopyOutline />}
+                    position="left"
+                    handleClick={() => {
+                      const text = "karouhifar@gmail.com";
+                      navigator.clipboard.writeText(text);
+                      setCopied(true);
+                    }}
+                    className="md:mt-5"
+                    otherClasses="!bg-[#161A31]"
+                  />
+                </div>
+              </BackgroundGradientAnimation>
+            </div>
           </FadeUp>
           <FadeUp
             number={6}
@@ -110,11 +139,7 @@ const Story: React.FC = () => {
             number={6}
             className="md:col-start-7 md:col-end-13 md:row-start-3 md:row-end-4"
           >
-            <SVGCard
-              title={"Located at North America Time Zone"}
-              direction="left"
-              className="h-48  md:h-full"
-            />
+            <SVGCard direction="left" className="h-48  md:h-full" />
           </FadeUp>
         </div>
       </div>
