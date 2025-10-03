@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
+
 import React from "react";
 import projects from "@/public/data/project.json";
 import { FaLocationArrow } from "react-icons/fa6";
 import { MagicCard } from "../ui/MagicCard";
-import placeholder from "@/public/images/placeholder.jpg";
 import placeholderBG from "@/public/images/bg.png";
 import Image from "next/image";
 const Projects = () => {
@@ -42,7 +43,7 @@ const Projects = () => {
             </p>
             <div className="flex items-center justify-between mt-7 mb-3">
               <div className="flex items-center">
-                {item.technologies.map(({ title, url }, index) => (
+                {item.technologies.map(({ url }, index) => (
                   <div
                     key={index + ""}
                     className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"

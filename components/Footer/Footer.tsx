@@ -2,7 +2,6 @@
 "use client";
 
 import Link from "next/link";
-import { ReactNode } from "react";
 import { FaGithub, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { HiPhoneArrowUpRight } from "react-icons/hi2";
 import type { IconType } from "react-icons";

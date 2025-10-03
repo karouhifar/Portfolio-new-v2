@@ -1,6 +1,4 @@
 import Hero from "@/components/Hero/Hero";
-import Image from "next/image";
-import data from "@/public/data/marquee-images.json";
 import React from "react";
 import { NavBarSizeable } from "@/components/NavBarSizeable/NavBarSizeable";
 
@@ -8,7 +6,6 @@ import Footer from "@/components/Footer/Footer";
 import Story from "@/components/Story/Story";
 import Projects from "@/components/Projects/Projects";
 import ContactSection from "@/components/Contact/Contact";
-import { ScrollStagger } from "@/components/ui/ScrollStagger";
 import { FadeUp } from "@/components/ui/FadeUp";
 
 export default function Home() {

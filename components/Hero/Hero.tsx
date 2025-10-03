@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { ArrowRight, Download } from "lucide-react";
 import Image from "next/image";
 import { Spotlight } from "../ui/Spotlight";
 import TextGenerateEffect from "../ui/textGenerateEffect";

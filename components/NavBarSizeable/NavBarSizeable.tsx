@@ -10,7 +10,7 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/Navbar";
-import { Children, useState } from "react";
+import { useState } from "react";
 
 export function NavBarSizeable({ children }: { children: React.ReactNode }) {
   const navItems = [

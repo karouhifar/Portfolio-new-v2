@@ -1,12 +1,11 @@
 import { cn } from "@/lib/utils";
-import { CloudCog, Cpu, CpuIcon, FileStackIcon, MapPin } from "lucide-react";
-import React, { ComponentPropsWithoutRef, HTMLAttributes, useId } from "react";
+import { CpuIcon, MapPin } from "lucide-react";
+import React, { HTMLAttributes, useId } from "react";
 import { BentoCard, BentoGrid } from "./bentoGrid";
 import { Globe } from "./Globe";
 import Image from "next/image";
 import Grid from "@/public/grid.svg";
 import { AnimatedSpan, Terminal, TypingAnimation } from "./Terminal";
-import { Spotlight } from "./Spotlight";
 import { FadeUp } from "./FadeUp";
 
 type Dir = "left" | "right" | "center" | undefined;
@@ -108,7 +107,7 @@ const SVGCard: React.FC<{
   className?: string;
   title?: string;
   children?: React.ReactNode;
-}> = ({ direction, className, title }) => {
+}> = ({ direction, className }) => {
   const clipId = useId();
   const CLIP_ID = `${clipId}-clip`;
 

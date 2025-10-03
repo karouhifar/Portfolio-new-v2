@@ -41,11 +41,7 @@ const fadeUp: Variants = {
   },
 };
 
-export default function ContactSection({
-  email = "karouhifar@gmail.com",
-}: {
-  email?: string;
-}) {
+export default function ContactSection({}: { email?: string }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle"
   );
