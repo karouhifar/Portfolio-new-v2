@@ -201,7 +201,14 @@ export const Terminal = ({
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const sequenceHasStarted = sequence ? !startOnView || isInView : false;
+  const [delayedInView, setDelayedInView] = useState(false);
+  const sequenceHasStarted = sequence ? !startOnView || delayedInView : false;
+
+  useEffect(() => {
+    if (!isInView) return; // only start timing once in view
+    const t = setTimeout(() => setDelayedInView(true), 2000);
+    return () => clearTimeout(t); // cleanup if component unmounts early
+  }, [isInView]);
 
   const contextValue = useMemo<SequenceContextValue | null>(() => {
     if (!sequence) return null;
@@ -227,7 +234,10 @@ export const Terminal = ({
   }, [children, sequence]);
 
   const content = (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : undefined}
+      transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
       ref={containerRef}
       className={cn(
         "border-border z-0 h-full max-h-[250px] w-full rounded-xl border border-white/20 bg-transparent backdrop-blur-xs shadow-lg",
@@ -244,7 +254,7 @@ export const Terminal = ({
       <pre className="p-4">
         <code className="grid gap-y-1 overflow-auto">{wrappedChildren}</code>
       </pre>
-    </div>
+    </motion.div>
   );
 
   if (!sequence) return content;

@@ -8,9 +8,12 @@ import { FaAws } from "react-icons/fa6";
 import { VscAzure } from "react-icons/vsc";
 import { BentoCard, BentoGrid } from "../ui/bentoGrid";
 import { MapPin } from "lucide-react";
+import Medium from "@/public/Medium.svg";
 import { BackgroundGradientAnimation } from "../ui/GradientBackground";
 import MagicButton from "../ui/MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const slugs = [
   "databricks",
@@ -80,8 +83,32 @@ const Story: React.FC = () => {
             <SVGCard className="h-48  md:h-full" />
           </FadeUp>
           {/* Top-right small */}
-          <FadeUp number={3} className="md:col-span-3 md:row-span-1">
-            <div className="h-48  md:h-full rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]" />
+          <FadeUp
+            number={3}
+            className="md:col-span-3 md:row-span-1 overflow-hidden"
+          >
+            <div className="h-48  md:h-full rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+              <p
+                className={`font-sans text-lg lg:text-xl p-5 font-bold  text-white text-center`}
+              >
+                Join My Newsletter
+              </p>
+              <div className="flex justify-center z-10 py-2">
+                <button className="px-8 py-2 pointer-events-auto cursor-pointer rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600">
+                  <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+                  <span className="relative z-20">Go to Medium</span>
+                </button>
+              </div>
+              <Image
+                src={Medium}
+                alt="Contact Illustration"
+                className={cn(
+                  "absolute -right-10 bottom-5 w-32 md:w-48 opacity-20",
+                  "object-cover object-center"
+                )}
+                priority
+              />
+            </div>
           </FadeUp>
           {/* Mid-right small */}
           <FadeUp

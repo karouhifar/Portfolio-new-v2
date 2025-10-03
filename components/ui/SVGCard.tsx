@@ -7,20 +7,9 @@ import Image from "next/image";
 import Grid from "@/public/grid.svg";
 import { AnimatedSpan, Terminal, TypingAnimation } from "./Terminal";
 import { Spotlight } from "./Spotlight";
+import { FadeUp } from "./FadeUp";
 
-type Dir = "left" | "right" | undefined;
-
-const features = [
-  {
-    Icon: MapPin,
-    name: "Calendar",
-    description: "Use the calendar to filter your files by date.",
-    className: "col-span-3 lg:col-span-1",
-    href: "#",
-    cta: "Learn more",
-    background: <div></div>,
-  },
-];
+type Dir = "left" | "right" | "center" | undefined;
 
 const SHAPES = {
   left: {
@@ -49,8 +38,8 @@ const SHAPES = {
     evenOdd: true,
     feature: {
       Icon: MapPin,
-      name: "Toronto, Canada",
-      description: "Location",
+      name: "Showcasing My Journey in IT Fields",
+      description: "Experience",
       className: "col-span-3 lg:col-span-1",
       direction: "right",
       href: "#",
@@ -88,21 +77,23 @@ const SHAPES = {
           </div>
 
           <div className="absolute -right-2 top-5">
-            <Terminal>
-              <TypingAnimation delay={0}>$ ls</TypingAnimation>
-              <AnimatedSpan delay={800} className="text-blue-500">
-                Documents VSCode Projects
-              </AnimatedSpan>
-              <TypingAnimation delay={1600}>$ cd VSCode</TypingAnimation>
-              <TypingAnimation delay={2400}>$ pwd</TypingAnimation>
-              <AnimatedSpan delay={3200} className="text-green-500">
-                /home/user/VSCode
-              </AnimatedSpan>
-              <TypingAnimation delay={2400}>$ whoami</TypingAnimation>
-              <AnimatedSpan delay={1700} className="text-green-500">
-                Kamyab-Rouhifar
-              </AnimatedSpan>
-            </Terminal>
+            <FadeUp number={7}>
+              <Terminal>
+                <TypingAnimation duration={150}>$ ls</TypingAnimation>
+                <AnimatedSpan delay={5800} className="text-blue-500">
+                  Documents VSCode Projects
+                </AnimatedSpan>
+                <TypingAnimation duration={150}>$ cd VSCode</TypingAnimation>
+                <TypingAnimation duration={150}>$ pwd</TypingAnimation>
+                <AnimatedSpan delay={3200} className="text-green-500">
+                  /home/user/VSCode
+                </AnimatedSpan>
+                <TypingAnimation duration={150}>$ whoami</TypingAnimation>
+                <AnimatedSpan delay={1700} className="text-green-500">
+                  Kamyab-Rouhifar
+                </AnimatedSpan>
+              </Terminal>
+            </FadeUp>
           </div>
         </>
       ),
