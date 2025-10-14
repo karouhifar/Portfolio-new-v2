@@ -28,21 +28,21 @@ const notifications = [
     description: "Full-stack Developer",
     date: "Jun 2021 - Sep 2021",
     image: logo_1,
-    color: "#00C9A7",
+    color: "#FFFFFF",
   },
   {
     name: "Viral Nation",
     description: "Software Engineer",
     date: "Jun 2022 - Aug 2023",
     image: logo_2,
-    color: "#FFB800",
+    color: "#FFFFFF",
   },
   {
     name: "CIBC",
     description: "Senior Application Developer",
     date: "Sep 2025 - Present",
     image: logo_3,
-    color: "#FF3D71",
+    color: "#FFFFFF",
   },
 ];
 
