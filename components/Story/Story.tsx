@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import React, { useId, useMemo, useState } from "react";
 import SVGCard from "../ui/SVGCard";
@@ -11,7 +10,6 @@ import MagicButton from "../ui/MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { label, title } from "motion/react-client";
 
 const slugs = [
   "databricks",
@@ -53,23 +51,15 @@ const slugs = [
 ];
 
 const chips = [
-  {
-    label: "Artificial Intelligence",
-    desc: "TensorFlow · PyTorch · Llama · LangChain · OpenAI · Hugging Face",
-  },
-  {
-    label: "Azure–Databricks",
-    desc: "Apache Spark · Delta Lake · Kafka · Data Factory Workflows",
-  },
-  {
-    label: "AWS",
-    desc: "Terraform · Bicep · Docker · CI/CD Pipeline",
-  },
+  "Artificial Intelligence",
+  "Azure–Databricks",
+  "AWS",
+  "Firebase",
+  "Full-Stack",
 ];
 
 const Story: React.FC = () => {
   const [copied, setCopied] = useState(false);
-  const [active, setActive] = useState("");
   const groupId = useId();
   const images = useMemo(
     () => slugs.map((slug) => `https://cdn.simpleicons.org/${slug}/ffffffA6`),
@@ -113,39 +103,17 @@ const Story: React.FC = () => {
               <div
                 role="tablist"
                 aria-label="Toolbox filters"
-                className={`col-start-2 col-span-4 space-y-10 m-2 z-50`}
+                className={`flex  flex-col w-36 col-start-2 col-span-4 gap-y-5 m-2 mx-10 z-50`}
               >
                 {chips.map((item, i) => {
-                  const isActive = active === item.label;
                   return (
                     <React.Fragment key={`${groupId}-frag-${i}`}>
                       <button
                         role="tab"
-                        aria-selected={isActive}
-                        className={[
-                          // base
-                          "px-2.5 text-sm rounded-xl font-medium block mb-0",
-                          "ring-1 ring-white/10 bg-white/5 text-slate-200/90",
-                          "transition-colors hover:bg-white/10 focus:outline-none",
-                          "focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50",
-                          // active
-                          isActive
-                            ? [
-                                "text-white",
-                                "opacity-85",
-                                "font-semibold",
-                                "bg-gradient-to-r from-[#6a1bad] to-[#100f5e]",
-                                "ring-1 ring-[#7a3ff2]/40",
-                                "shadow-[0_0_0_1px_rgba(255,255,255,0.06)_inset,0_0_24px_rgba(122,63,242,0.35)]",
-                              ].join(" ")
-                            : "",
-                        ].join(" ")}
+                        className="p-1 text-sm rounded-xl font-medium block mb-0 ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
                       >
-                        {item.label}
+                        {item}
                       </button>
-                      <p className="text-slate-200/90 px-2.5 my-3 ml-2">
-                        {item.desc}
-                      </p>
                     </React.Fragment>
                   );
                 })}
