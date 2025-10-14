@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CpuIcon, MapPin } from "lucide-react";
 import React, { HTMLAttributes, useId } from "react";
-import { BentoCard, BentoGrid } from "./bentoGrid";
+import { BentoCard, BentoGrid } from "./BentoGrid";
 import { Globe } from "./Globe";
 import Image, { StaticImageData } from "next/image";
 import Grid from "@/public/grid.svg";
@@ -67,7 +67,7 @@ const Notification = ({ name, description, image, color, date }: Item) => {
           }}
         >
           <Image
-            src={`/public/images/${image}`}
+            src={image}
             alt={name}
             width={40}
             height={40}
