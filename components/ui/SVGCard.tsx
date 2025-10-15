@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CpuIcon, MapPin } from "lucide-react";
 import React, { HTMLAttributes, useId } from "react";
-import { BentoCard, BentoGrid } from "./bentoGrid";
+import { BentoCard, BentoGrid } from "./BentoGrid";
 import { Globe } from "./Globe";
 import Image, { StaticImageData } from "next/image";
 import Grid from "@/public/grid.svg";
@@ -124,7 +124,7 @@ const SHAPES = {
       cta: "Learn more",
       background: (
         <div className="absolute left-15 top-0 w-full max-w-xs my-5 mx-auto">
-          <InViewMount delay={1500}>
+          <InViewMount delay={1000}>
             <AnimatedList>
               {notifications.map((item, idx) => (
                 <Notification {...item} key={idx + ""} />
