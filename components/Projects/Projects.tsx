@@ -27,9 +27,17 @@ const Projects = () => {
               >
                 <Image src={placeholderBG} alt="cover" />
               </div>
+              <Image
+                src={item.image}
+                alt={"project" + item.id}
+                width={400}
+                height={300}
+                objectFit="cover"
+                className="z-10 absolute bottom-0 rounded-md rotate-[5deg] origin-center"
+              />
             </div>
 
-            <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
+            <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white">
               {item.title}
             </h1>
             <p
@@ -51,13 +59,18 @@ const Projects = () => {
                       transform: `translateX(-${5 * index + 2}px)`,
                     }}
                   >
-                    <img src={url} alt="icon5" className="p-2" />
+                    <Image
+                      src={url}
+                      fill
+                      alt={`icon ${index}`}
+                      className="p-2"
+                    />
                   </div>
                 ))}
               </div>
 
               <div className="flex justify-center items-center">
-                <p className="flex lg:text-xl md:text-xs text-sm text-purple">
+                <p className="flex lg:text-xl md:text-xs text-sm text-white font-medium">
                   Check Live Site
                 </p>
                 <FaLocationArrow className="ms-3" color="#fff" />

@@ -2,27 +2,27 @@
   {
     "id": 1,
     "title": "DreamDigital",
-    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "image": "https://d39oted90y97ty.cloudfront.net/projects/Dreamdigital.png",
     "technologies": [
       {
-        "title": "JavaScript",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "TypeScript",
+        "url": "https://img.icons8.com/?size=100&id=uJM6fQYqDaZK&format=png&color=000000"
       },
       {
-        "title": "Next.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "GatsbyJS",
+        "url": "https://img.icons8.com/?size=100&id=zGuJihUOHoUB&format=png&color=000000"
       },
       {
-        "title": "MUI",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "Tailwind CSS",
+        "url": "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000"
       },
       {
-        "title": "Chart.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "Google Analytics",
+        "url": "https://img.icons8.com/?size=100&id=fcKpGwAbxxfP&format=png&color=000000"
       },
       {
-        "title": "Leaflet",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "Node",
+        "url": "https://img.icons8.com/?size=100&id=54087&format=png&color=000000"
       }
     ],
     "description": "DreamDigital is an expert at assisting local businesses in North America with tailored IT solutions. We specialize in all-things AI, automation tools, web development, digital branding – and everything you can imagine. (It is a side business that I am working for)"
@@ -30,27 +30,27 @@
   {
     "id": 2,
     "title": "YouTube Analyzer",
-    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "image": "https://d39oted90y97ty.cloudfront.net/projects/YoutubeAnalyzer.png",
     "technologies": [
       {
+        "title": "GPT-5",
+        "url": "https://img.icons8.com/?size=100&id=TUk7vxvtu6hX&format=png&color=000000"
+      },
+      {
+        "title": "Stripe",
+        "url": "https://img.icons8.com/?size=100&id=18980&format=png&color=000000"
+      },
+      {
+        "title": "emotion",
+        "url": "https://raw.githubusercontent.com/emotion-js/emotion/main/emotion.png"
+      },
+      {
+        "title": "Python",
+        "url": "https://img.icons8.com/?size=100&id=13441&format=png&color=000000"
+      },
+      {
         "title": "JavaScript",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
-      },
-      {
-        "title": "Next.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
-      },
-      {
-        "title": "MUI",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
-      },
-      {
-        "title": "Chart.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
-      },
-      {
-        "title": "Leaflet",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "url": "https://img.icons8.com/?size=100&id=108784&format=png&color=000000"
       }
     ],
     "description": "The YouTube Analyzer extension leverages OpenAI’s fine-tuning AI models to provide detailed analysis of YouTube video and comments summaries. It offers content creators valuable insights into audience engagement and sentiment, enabling them to optimize their content strategy based on deep, data-driven understanding."
@@ -58,27 +58,27 @@
   {
     "id": 3,
     "title": "MediaKits",
-    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "image": "https://d39oted90y97ty.cloudfront.net/projects/Mediakits.png",
     "technologies": [
       {
-        "title": "JavaScript",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
-      },
-      {
-        "title": "Next.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
-      },
-      {
         "title": "MUI",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "url": "https://v4.material-ui.com/static/logo.png"
       },
       {
-        "title": "Chart.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "GraphQL",
+        "url": "https://img.icons8.com/?size=100&id=zdI5E8moxhs-&format=png&color=000000"
       },
       {
-        "title": "Leaflet",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "TypeScript",
+        "url": "https://img.icons8.com/?size=100&id=uJM6fQYqDaZK&format=png&color=000000"
+      },
+      {
+        "title": "AWS",
+        "url": "https://hackfest.ca/images/partenaires/aws.png"
+      },
+      {
+        "title": "PostgreSQL",
+        "url": "https://img.icons8.com/?size=100&id=38561&format=png&color=000000"
       }
     ],
     "description": "A media kit is a collection of promotional materials that is used to provide information about an organization or influencer to the media. It typically includes information such as company background, key contacts, press releases, product or service descriptions, and high-resolution images or videos. Media kits are often used by public relations professionals, marketers, and influencers to promote their company or brand to the media, and to provide journalists and other members of the media with the information they need to write stories or create content about the company or brand."
@@ -86,27 +86,27 @@
   {
     "id": 4,
     "title": "Covid-19 Tracker Website",
-    "image": "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=",
+    "image": "https://d39oted90y97ty.cloudfront.net/projects/Covid-19.png",
     "technologies": [
       {
         "title": "JavaScript",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "url": "https://img.icons8.com/?size=100&id=108784&format=png&color=000000"
       },
       {
-        "title": "Next.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "Figma",
+        "url": "https://img.icons8.com/?size=100&id=zfHRZ6i1Wg0U&format=png&color=000000"
       },
       {
-        "title": "MUI",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "Firebase",
+        "url": "https://img.icons8.com/?size=100&id=62452&format=png&color=000000"
       },
       {
-        "title": "Chart.js",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "Redux",
+        "url": "https://img.icons8.com/?size=100&id=jD-fJzVguBmw&format=png&color=000000"
       },
       {
-        "title": "Leaflet",
-        "url": "https://static.thenounproject.com/png/2616532-200.png"
+        "title": "React",
+        "url": "https://img.icons8.com/?size=100&id=123603&format=png&color=000000"
       }
     ],
     "description": "A COVID-19 Tracker website is a digital platform that provides real-time information and updates on the ongoing COVID-19 pandemic. These websites typically gather data from an Open Disease Data API (disease.sh) to provide the most up-to-date and accurate information on the number of confirmed cases, deaths, and recoveries."
