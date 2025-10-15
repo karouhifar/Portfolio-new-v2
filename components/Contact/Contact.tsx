@@ -196,9 +196,9 @@ export default function ContactSection({}: { email?: string }) {
                           aria-label={label}
                           whileHover={{ y: -2 }}
                           whileTap={{ scale: 0.96 }}
-                          className="grid h-14 w-14 place-items-center rounded-full border border-neutral-200 bg-white text-neutral-700 transition hover:border-blue-500/50 hover:text-blue-600"
+                          className="grid h-14 w-14 place-items-center rounded-full border border-neutral-700 bg-transparent text-neutral-700 transition hover:border-blue-500/50 hover:text-blue-600 "
                         >
-                          <Icon className="h-6 w-6" />
+                          <Icon className="h-6 w-6 " color="#fff" />
                         </motion.a>
                       ))}
                     </div>
