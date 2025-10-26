@@ -66,18 +66,6 @@ const BentoCard = ({
           {name}
         </h3>
       </div>
-
-      <div
-        className={cn(
-          "lg:hidden pointer-events-none flex w-full translate-y-0 transform-gpu flex-row items-center transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-        )}
-      >
-        <MagicButton
-          title="Show my work"
-          icon={<ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />}
-          position="right"
-        />
-      </div>
     </div>
 
     <div

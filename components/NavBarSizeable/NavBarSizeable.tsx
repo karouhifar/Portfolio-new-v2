@@ -36,9 +36,11 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems items={navItems} />
-          <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
+          <NavItems items={navItems} className="max-w-md" />
+          <div className="hidden items-center gap-3 lg:flex">
+            <NavbarButton variant="secondary" className="hidden sm:inline-flex">
+              Login
+            </NavbarButton>
             <NavbarButton variant="primary">Book a call</NavbarButton>
           </div>
         </NavBody>
@@ -67,7 +69,7 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
                 <span className="block">{item.name}</span>
               </a>
             ))}
-            <div className="flex w-full flex-col gap-4">
+            <div className="flex w-full flex-col gap-3 pt-2">
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
@@ -87,8 +89,7 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
         </MobileNav>
       </Navbar>
       <main
-        className="flex justify-center items-center 
-       flex-col mx-auto sm:px-10 px-5"
+        className="mx-auto flex w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8"
       >
         {children}
       </main>

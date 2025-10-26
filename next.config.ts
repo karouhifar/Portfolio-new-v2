@@ -33,6 +33,18 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/images/partenaires/aws.png",
       },
+      {
+        protocol: "https",
+        hostname: "media.istockphoto.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "static.thenounproject.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

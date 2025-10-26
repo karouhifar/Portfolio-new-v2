@@ -40,7 +40,7 @@ export default function Footer() {
         }}
       />
 
-      <div className="mx-auto flex max-w-5xl flex-col items-center px-6 py-28 text-center md:py-10">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-20 text-center sm:px-6 md:py-10">
         <Image
           src={logo}
           alt="Kamyab Rouhifar"
@@ -71,13 +71,13 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 pb-8">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-4 pb-8 text-center sm:px-6 md:flex-row md:gap-0 md:text-left">
         <p className="text-sm text-white/60">
           Copyright ©{year}{" "}
           <span className="text-white/80">Kamyab Rouhifar</span>
         </p>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {SOCIALS.map(({ href, label, Icon }) => (
             <a
               key={label}

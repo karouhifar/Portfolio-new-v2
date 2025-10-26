@@ -9,7 +9,7 @@ import hero from "@/public/images/hero-profile.png";
 
 const Hero = () => {
   return (
-    <section className="relative pb-20 pt-28 md:pt-36 bg-background/60  w-full">
+    <section className="relative w-full bg-background/60 pb-20 pt-28 md:pt-36">
       <div className="overflow-x-hidden">
         <Spotlight
           className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen "
@@ -22,8 +22,8 @@ const Hero = () => {
         <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
       </div>
       <div className="relative z-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
             {/* Copy */}
             <div className="text-center lg:text-left">
               <TextGenerateEffect
@@ -56,7 +56,7 @@ const Hero = () => {
 
             {/* Image */}
             <div className="order-first lg:order-none">
-              <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-3xl  shadow-2xl lg:ml-auto lg:max-w-none lg:aspect-[1]">
+              <div className="relative mx-auto aspect-[4/3] w-full max-w-md overflow-hidden rounded-3xl shadow-2xl sm:max-w-xl lg:ml-auto lg:max-w-none lg:aspect-square">
                 {/* 
                   Replace src with your image path.
                   If using a remote image, add the domain to next.config.js images.domains.

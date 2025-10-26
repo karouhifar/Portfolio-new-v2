@@ -105,9 +105,9 @@ export default function ContactSection({}: { email?: string }) {
   };
 
   return (
-    <section className="mx-auto my-10 w-full md:my-16">
+    <section className="relative mx-auto w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
       {/* Background: deep navy + grid + soft glow */}
-      <div className="absolute inset-0 -z-0">
+      <div className="pointer-events-none absolute inset-0 -z-10">
         <AnimatePresence>
           <AnimatedShape
             shape={{
@@ -139,45 +139,46 @@ export default function ContactSection({}: { email?: string }) {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="mx-auto w-full max-w-7xl"
       >
-        <GlassEffect>
-          <div className="h-full ">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:divide-x md:divide-neutral-200/[0.2] z-50">
+        <GlassEffect className="space-y-10 md:space-y-0">
+          <div className="h-full">
+            <div className="z-50 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 md:divide-x md:divide-neutral-200/[0.2]">
               {/* Left column */}
               <motion.div
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
-                className="max-w-xl px-4 py-10 sm:px-10"
+                className="max-w-xl px-1 py-2 sm:px-4 md:px-6"
                 style={{
                   color: "#BEC1DD",
                   margin: "1vh 0",
                 }}
               >
-                <h2 className="text-3xl tracking-tight font-bold sm:text-4xl">
+                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                   Let&apos;s Talk
                 </h2>
 
-                <p className="mt-4 text-lg leading-7 ">
+                <p className="mt-4 text-lg leading-7 text-[#BEC1DD]">
                   Have some big idea or brand to develop and need help? Then
                   reach out—we&apos;d love to hear about your project and
                   provide help.
                 </p>
-                <div className=""></div>
                 <div className="mt-10 space-y-8">
                   {/* Email */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
-                    className="bg-purple-800/10 backdrop-blur-sm border border-purple-600/30 rounded-2xl p-6 mb-8 max-w-md"
+                    className="mb-6 max-w-md rounded-2xl border border-purple-600/30 bg-purple-800/10 p-6 backdrop-blur-sm"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-purple-600/40 rounded-xl flex items-center justify-center">
-                        <MdOutlineEmail className="w-6 h-6 text-white" />
+                      <div className="hidden md:flex h-12 w-12 items-center justify-center rounded-xl bg-purple-600/40">
+                        <MdOutlineEmail className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <p className="text-white font-semibold text-lg">
+                        <p className="flex text-lg font-semibold text-white gap-2 items-center-safe">
+                          <MdOutlineEmail className="block md:hidden h-6 w-6 text-white" />
                           Email
                         </p>
                         <p className="text-gray-300">karouhifar@gmail.com</p>
@@ -187,8 +188,10 @@ export default function ContactSection({}: { email?: string }) {
 
                   {/* Socials */}
                   <div>
-                    <h3 className="text-lg font-semibold">Socials</h3>
-                    <div className="mt-4 flex gap-5">
+                    <h3 className="text-lg font-semibold text-white">
+                      Socials
+                    </h3>
+                    <div className="mt-4 flex gap-4 sm:gap-5">
                       {socials.map(({ Icon, label, href }) => (
                         <motion.a
                           key={label}
@@ -196,9 +199,9 @@ export default function ContactSection({}: { email?: string }) {
                           aria-label={label}
                           whileHover={{ y: -2 }}
                           whileTap={{ scale: 0.96 }}
-                          className="grid h-14 w-14 place-items-center rounded-full border border-neutral-700 bg-transparent text-neutral-700 transition hover:border-blue-500/50 hover:text-blue-600 "
+                          className="grid h-12 w-12 place-items-center rounded-full border border-neutral-500/50 bg-white/5 text-neutral-100 transition hover:border-blue-500/50 hover:text-blue-300 sm:h-14 sm:w-14"
                         >
-                          <Icon className="h-6 w-6 " color="#fff" />
+                          <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                         </motion.a>
                       ))}
                     </div>
@@ -212,7 +215,7 @@ export default function ContactSection({}: { email?: string }) {
                 variants={fadeUp}
                 initial="hidden"
                 animate="show"
-                className="space-y-5 px-4 py-10 sm:px-10"
+                className="space-y-5 px-1 py-2 sm:px-4 md:px-6"
                 aria-live="polite"
               >
                 {/* Name */}
@@ -288,8 +291,8 @@ export default function ContactSection({}: { email?: string }) {
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 1.2 }}
-                  className="inline-flex self-end w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-purple-600  px-6 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-blue-600/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 md:w-auto"
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-blue-600/90 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20 md:w-auto"
                   disabled={status === "submitting" || status === "success"}
                 >
                   {status === "success"
@@ -301,7 +304,7 @@ export default function ContactSection({}: { email?: string }) {
               </motion.form>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 hidden md:block -z-10 w-full overflow-hidden rounded-b-3xl">
+          <div className="pointer-events-none absolute bottom-0 left-0 hidden w-full overflow-hidden rounded-b-3xl md:block">
             <Image
               src={CNtower}
               alt="Contact Illustration"

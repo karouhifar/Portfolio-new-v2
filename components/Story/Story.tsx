@@ -5,11 +5,19 @@ import { FadeUp } from "../ui/FadeUp";
 import { IconCloud } from "../ui/IconCloud";
 import Medium from "@/public/Medium.svg";
 import Icon from "@/public/Icon.svg";
+import { CpuIcon } from "lucide-react";
 import { BackgroundGradientAnimation } from "../ui/GradientBackground";
 import MagicButton from "../ui/MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
+import Grid from "@/public/grid.svg";
+import { AnimatedSpan, Terminal, TypingAnimation } from "../ui/Terminal";
+import { InViewMount } from "../ui/InViewMount";
+import { AnimatedList } from "../ui/AnimatedItemList";
+import Notification, { notifications } from "../Notification/Noification";
+import CanadaDottedMap from "../ui/CanadaDottedMap";
 
 const slugs = [
   "databricks",
@@ -65,12 +73,13 @@ const Story: React.FC = () => {
     () => slugs.map((slug) => `https://cdn.simpleicons.org/${slug}/ffffffA6`),
     []
   );
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
   return (
-    <div className="w-full py-6 md:h-[57rem]">
-      <div className="mx-auto max-w-7xl">
+    <section className="w-full py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         {/* The grid */}
         <div
-          className="relative grid gap-10 md:[grid-template-columns:repeat(12,minmax(0,1fr))] md:[grid-template-rows:repeat(3,200px)]"
+          className="relative flex flex-col gap-6 sm:gap-8 lg:grid lg:grid-cols-12 lg:grid-rows-[repeat(3,minmax(0,200px))]"
           // Control hub size and border thickness with CSS vars for easy tuning
           style={
             {
@@ -80,8 +89,11 @@ const Story: React.FC = () => {
           }
         >
           {/* Left tall (spans two rows) */}
-          <FadeUp number={1} className="md:col-span-3 md:row-span-2 ">
-            <div className="grid grid-cols-4 grid-rows-[100px_1fr]  rounded-3xl h-48 md:h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+          <FadeUp
+            number={1}
+            className="order-1 md:order-none md:col-span-3 md:row-span-2 "
+          >
+            <div className="grid grid-cols-4 grid-rows-[100px_1fr]  rounded-3xl h-96 md:h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
               <div className="relative w-30 flex-none row-span-3 col-span-1">
                 <Image
                   src={Icon}
@@ -110,7 +122,7 @@ const Story: React.FC = () => {
                     <React.Fragment key={`${groupId}-frag-${i}`}>
                       <button
                         role="tab"
-                        className="p-1 text-sm rounded-xl font-medium block mb-0 ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
+                        className="p-1 text-xs md:text-sm rounded-xl font-medium block mb-0 ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
                       >
                         {item}
                       </button>
@@ -121,17 +133,75 @@ const Story: React.FC = () => {
             </div>
           </FadeUp>
           {/* Top center wide */}
-          <FadeUp number={2} className="md:col-span-6 md:row-span-1">
-            <SVGCard className="h-48  md:h-full" />
+          <FadeUp
+            number={2}
+            className="order-4 md:order-none lg:col-span-6 lg:row-span-1 "
+          >
+            {isSmallScreen ? (
+              <div className="h-full min-h-[30rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+                <div className="w-full h-full absolute left-0 top-0 overflow-hidden">
+                  <Image
+                    src={Grid}
+                    alt="Contact Illustration"
+                    className={cn(
+                      "absolute right-0 bottom-0 w-full h-full",
+                      "object-cover object-center"
+                    )}
+                    priority
+                  />
+                </div>
+                <div className="p-4 w-full max-w-xs pt-10">
+                  <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+                    <CpuIcon className="h-12 w-12 origin-left transform-gpu text-neutral-400 transition-all duration-300 ease-in-out group-hover:scale-75" />
+
+                    <p className="text-sm max-w-lg text-neutral-200">
+                      The Inside Scoop
+                    </p>
+                    <h3
+                      className={`font-sans text-lgl max-w-96 font-bold z-10 text-white`}
+                    >
+                      Working on Cloud Technologies and DevOps Practices
+                    </h3>
+                  </div>
+                </div>
+                <div className="m-4">
+                  <Terminal>
+                    <TypingAnimation className="text-white" duration={150}>
+                      $ ls
+                    </TypingAnimation>
+                    <AnimatedSpan delay={5800} className="text-blue-500">
+                      Documents VSCode Projects
+                    </AnimatedSpan>
+                    <TypingAnimation className="text-white" duration={150}>
+                      $ cd VSCode
+                    </TypingAnimation>
+                    <TypingAnimation className="text-white" duration={150}>
+                      $ pwd
+                    </TypingAnimation>
+                    <AnimatedSpan delay={3200} className="text-green-500">
+                      /home/user/VSCode
+                    </AnimatedSpan>
+                    <TypingAnimation className="text-white" duration={150}>
+                      $ whoami
+                    </TypingAnimation>
+                    <AnimatedSpan delay={1700} className="text-green-500">
+                      Kamyab-Rouhifar
+                    </AnimatedSpan>
+                  </Terminal>
+                </div>
+              </div>
+            ) : (
+              <SVGCard className="h-full min-h-[12rem]" />
+            )}
           </FadeUp>
           {/* Top-right small */}
           <FadeUp
             number={3}
-            className="md:col-span-3 md:row-span-1 overflow-hidden"
+            className="order-2 md:order-none overflow-hidden lg:col-span-3 lg:row-span-1"
           >
-            <div className="h-48  md:h-full rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+            <div className="h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
               <p
-                className={`font-sans text-lg lg:text-xl p-5 font-bold  text-white text-center`}
+                className={`font-sans p-6 text-lg font-bold text-white text-center lg:text-xl`}
               >
                 Join My Newsletter
               </p>
@@ -145,7 +215,7 @@ const Story: React.FC = () => {
                 src={Medium}
                 alt="Contact Illustration"
                 className={cn(
-                  "absolute -right-10 bottom-5 w-32 md:w-48 opacity-20",
+                  "absolute -right-5 md:-right-10 bottom-5 w-32 md:w-48 opacity-20",
                   "object-cover object-center"
                 )}
                 priority
@@ -155,12 +225,12 @@ const Story: React.FC = () => {
           {/* Mid-right small */}
           <FadeUp
             number={4}
-            className="md:col-start-10 md:col-end-13 md:row-start-2 md:row-end-3"
+            className="order-3 md:order-none lg:col-start-10 lg:col-end-13 lg:row-start-2 lg:row-end-3"
           >
-            <div className="relative h-48 flex flex-col ">
+            <div className="relative flex h-full min-h-[12rem] flex-col">
               <BackgroundGradientAnimation>
                 <p
-                  className={`font-sans text-lg lg:text-xl p-5 font-bold  text-white text-center`}
+                  className={`font-sans p-5 text-lg font-bold text-white text-center lg:text-xl`}
                 >
                   Do you want to start a project together?
                 </p>
@@ -176,43 +246,83 @@ const Story: React.FC = () => {
                       navigator.clipboard.writeText(text);
                       setCopied(true);
                     }}
-                    className="md:mt-5"
-                    otherClasses="!bg-[#161A31]"
+                    className="md:mt-5 w-50 m-4"
+                    otherClasses="!bg-[#161A31] px-4 py-2 text-xs md:text-base"
                   />
                 </div>
               </BackgroundGradientAnimation>
             </div>
           </FadeUp>
-          <FadeUp
-            number={6}
-            className="md:col-start-5 md:col-end-9 md:row-start-2 md:row-end-4"
-          >
-            {/* CENTRAL HUB (creates the inverted-radius illusion by sitting above the cards) */}
-            <div className="relative flex size-full max-w-lg items-center justify-center rounded-lg">
-              <IconCloud images={images} />
-            </div>
-          </FadeUp>
+          {!isSmallScreen && (
+            <FadeUp
+              number={6}
+              className="order-6 md:order-none lg:col-start-5 lg:col-end-9 lg:row-start-2 lg:row-end-4"
+            >
+              {/* CENTRAL HUB (creates the inverted-radius illusion by sitting above the cards) */}
+              <div className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-lg sm:max-w-md lg:max-w-lg">
+                <IconCloud images={images} />
+              </div>
+            </FadeUp>
+          )}
           {/* Bottom left wide */}
           <FadeUp
             number={5}
-            className="md:col-start-1 md:col-end-7 md:row-start-3 md:row-end-4 "
+            className="order-6 md:order-none lg:col-start-1 lg:col-end-7 lg:row-start-3 lg:row-end-4"
           >
-            <SVGCard
-              title={"Located at North America Time Zone"}
-              direction="right"
-              className="h-48  md:h-full"
-            />
+            {!isSmallScreen ? (
+              <SVGCard
+                title={"Located at North America Time Zone"}
+                direction="right"
+                className="h-full min-h-[12rem]"
+              />
+            ) : (
+              <div className="flex flex-col justify-center items-center w-full">
+                <div className="py-8 pt-1 text-center">
+                  <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+                    <h3
+                      className={`font-sans text-lg max-w-96 font-bold z-10 text-white`}
+                    >
+                      Showcasing My Journey in IT Fields
+                    </h3>
+                  </div>
+                </div>
+                <div className="w-full">
+                  <InViewMount delay={1000}>
+                    <AnimatedList>
+                      {notifications.map((item, idx) => (
+                        <Notification {...item} key={idx + ""} />
+                      ))}
+                    </AnimatedList>
+                  </InViewMount>
+                </div>
+              </div>
+            )}
           </FadeUp>
           {/* Bottom right wide */}
           <FadeUp
             number={6}
-            className="md:col-start-7 md:col-end-13 md:row-start-3 md:row-end-4"
+            className="order-7 md:order-none lg:col-start-7 lg:col-end-13 lg:row-start-3 lg:row-end-4"
           >
-            <SVGCard direction="left" className="h-48  md:h-full" />
+            {!isSmallScreen ? (
+              <SVGCard direction="left" className="h-full min-h-[12rem]" />
+            ) : (
+              <div className="flex flex-col justify-center items-center w-full mt-10">
+                <div className="py-8 pt-1 text-center">
+                  <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+                    <h3
+                      className={`font-sans text-lg max-w-96 font-bold z-10 text-white`}
+                    >
+                      Currently based in North America Time Zone
+                    </h3>
+                  </div>
+                </div>
+                <CanadaDottedMap />
+              </div>
+            )}
           </FadeUp>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

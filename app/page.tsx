@@ -12,14 +12,14 @@ export default function Home() {
   return (
     <div>
       <NavBarSizeable>
-        <div className="w-full max-w-7xl h-auto">
+        <div className="w-full max-w-7xl space-y-16 lg:space-y-24">
           <FadeUp amount={0.75}>
             <Hero />
           </FadeUp>
           <FadeUp amount={0.45}>
             <Story />
           </FadeUp>
-          <FadeUp amount={0.35}>
+          <FadeUp amount={0.15}>
             <Projects />
           </FadeUp>
           <FadeUp amount={0.25}>

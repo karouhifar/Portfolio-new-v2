@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import React from "react";
 import projects from "@/public/data/project.json";
 import { FaLocationArrow } from "react-icons/fa6";
@@ -8,78 +6,75 @@ import placeholderBG from "@/public/images/bg.png";
 import Image from "next/image";
 const Projects = () => {
   return (
-    <div className="py-20">
-      <h1 className="heading">
-        A small selection of{" "}
-        <span className="text-purple">recent projects</span>
-      </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto w-full">
-        {projects.map((item) => (
-          <MagicCard
-            key={item.id}
-            containerClassName="col-span-1 h-full bg-background min-h-[500px] lg:min-h-[300px]"
-            className=""
-          >
-            <div className="relative flex items-center justify-center sm:w-full w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
-              <div
-                className="relative w-full h-full overflow-hidden lg:rounded-3xl"
-                style={{ backgroundColor: "#13162D" }}
-              >
-                <Image src={placeholderBG} alt="cover" />
-              </div>
-              <Image
-                src={item.image}
-                alt={"project" + item.id}
-                width={400}
-                height={300}
-                objectFit="cover"
-                className="z-10 absolute bottom-0 rounded-md rotate-[5deg] origin-center"
-              />
-            </div>
+    <section className="w-full md:py-20 lg:py-24">
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+        <h2 className="text-balance text-center text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
+          A small selection of{" "}
+          <span className="text-purple">recent projects</span>
+        </h2>
 
-            <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white">
-              {item.title}
-            </h1>
-            <p
-              className="lg:text-xl lg:font-normal font-light text-sm line-clamp-5"
-              style={{
-                color: "#BEC1DD",
-                margin: "1vh 0",
-              }}
+        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+          {projects.map((item) => (
+            <MagicCard
+              key={item.id}
+              containerClassName="col-span-1 h-full min-h-[26rem] bg-background"
+              className="px-6 py-10 sm:px-8 sm:py-12"
             >
-              {item.description}
-            </p>
-            <div className="flex items-center justify-between mt-7 mb-3">
-              <div className="flex items-center">
-                {item.technologies.map(({ url }, index) => (
-                  <div
-                    key={index + ""}
-                    className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
-                    style={{
-                      transform: `translateX(-${5 * index + 2}px)`,
-                    }}
-                  >
-                    <Image
-                      src={url}
-                      fill
-                      alt={`icon ${index}`}
-                      className="p-2"
-                    />
-                  </div>
-                ))}
+              <div className="relative mb-8 flex h-52 w-full items-center justify-center overflow-hidden rounded-3xl bg-[#13162D] sm:h-60 lg:h-72">
+                <div className="absolute inset-0">
+                  <Image
+                    src={placeholderBG}
+                    alt="Project background texture"
+                    className="h-full w-full object-cover opacity-90"
+                    priority
+                  />
+                </div>
+                <Image
+                  src={item.image}
+                  alt={`Project ${item.id} showcase`}
+                  width={420}
+                  height={320}
+                  className="relative z-10 w-4/5 max-w-sm rounded-2xl object-cover shadow-xl sm:w-3/4"
+                />
               </div>
 
-              <div className="flex justify-center items-center">
-                <p className="flex lg:text-xl md:text-xs text-sm text-white font-medium">
-                  Check Live Site
-                </p>
-                <FaLocationArrow className="ms-3" color="#fff" />
+              <h3 className="line-clamp-1 text-lg font-semibold text-white md:text-xl lg:text-2xl">
+                {item.title}
+              </h3>
+              <p className="mt-3 line-clamp-5 text-sm font-light text-[#BEC1DD] md:text-base lg:text-lg lg:font-normal">
+                {item.description}
+              </p>
+
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center">
+                  {item.technologies.map(({ url }, index) => (
+                    <div
+                      key={index + ""}
+                      className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-black sm:h-9 sm:w-9 lg:h-10 lg:w-10"
+                      style={{
+                        transform: `translateX(-${5 * index + 2}px)`,
+                      }}
+                    >
+                      <Image
+                        src={url}
+                        fill
+                        alt={`technology-${index}`}
+                        className="p-2"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-3 text-sm font-medium text-purple md:text-base lg:text-lg">
+                  <span className="text-white">Check Live Site</span>
+                  <FaLocationArrow className="text-white" />
+                </div>
               </div>
-            </div>
-          </MagicCard>
-        ))}
+            </MagicCard>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
