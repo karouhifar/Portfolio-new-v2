@@ -73,14 +73,27 @@ const Story: React.FC = () => {
     () => slugs.map((slug) => `https://cdn.simpleicons.org/${slug}/ffffffA6`),
     []
   );
+
+  // mobile & small screens
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+
   return (
     <section className="w-full py-12 sm:py-16 lg:py-20">
       <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        {/* The grid */}
+        {/* Responsive grid wrapper */}
         <div
-          className="relative flex flex-col gap-6 sm:gap-8 lg:grid lg:grid-cols-12 lg:grid-rows-[repeat(3,minmax(0,200px))]"
-          // Control hub size and border thickness with CSS vars for easy tuning
+          className="
+            relative
+            grid
+            gap-6 sm:gap-8
+            grid-cols-1
+            sm:grid-cols-2
+            sm:grid-rows-2
+            md:grid-cols-6
+            lg:grid-cols-12
+            auto-rows-[minmax(1rem,auto)]
+            md:auto-rows-[minmax(14rem,auto)]
+          "
           style={
             {
               "--hub-size": "180px",
@@ -88,12 +101,17 @@ const Story: React.FC = () => {
             } as React.CSSProperties
           }
         >
-          {/* Left tall (spans two rows) */}
+          {/* 1. Toolbox card (left column, tall) */}
           <FadeUp
             number={1}
-            className="order-1 md:order-none md:col-span-3 md:row-span-2 "
+            className="
+              order-1 md:order-none
+              sm:row-span-2
+              md:col-span-2 md:row-span-2
+              lg:col-span-3 lg:row-span-2
+            "
           >
-            <div className="grid grid-cols-4 grid-rows-[100px_1fr]  rounded-3xl h-96 md:h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+            <div className="grid grid-cols-4 grid-rows-[100px_1fr] rounded-3xl h-full md:h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
               <div className="relative w-30 flex-none row-span-3 col-span-1">
                 <Image
                   src={Icon}
@@ -102,43 +120,46 @@ const Story: React.FC = () => {
                   priority
                 />
               </div>
+
               <div className="py-5 ml-10 col-span-3">
-                <p
-                  className={`font-sans text-lg lg:text-2xl font-bold  text-white`}
-                >
+                <p className="font-sans text-lg lg:text-2xl font-bold text-white">
                   Toolbox
                 </p>
                 <p className="text-neutral-200 opacity-60">
                   What I reach for daily
                 </p>
               </div>
+
               <div
                 role="tablist"
                 aria-label="Toolbox filters"
-                className={`flex  flex-col w-36 col-start-2 col-span-4 gap-y-5 m-2 mx-10 z-50`}
+                className="flex flex-col w-36 col-start-2 col-span-4 gap-y-5 m-2 mx-10 z-50"
               >
-                {chips.map((item, i) => {
-                  return (
-                    <React.Fragment key={`${groupId}-frag-${i}`}>
-                      <button
-                        role="tab"
-                        className="p-1 text-xs md:text-sm rounded-xl font-medium block mb-0 ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
-                      >
-                        {item}
-                      </button>
-                    </React.Fragment>
-                  );
-                })}
+                {chips.map((item, i) => (
+                  <React.Fragment key={`${groupId}-frag-${i}`}>
+                    <button
+                      role="tab"
+                      className="p-1 text-xs md:text-sm rounded-xl font-medium block mb-0 ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
+                    >
+                      {item}
+                    </button>
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           </FadeUp>
-          {/* Top center wide */}
+
+          {/* 2. Inside Scoop / SVGCard (center top wide) */}
           <FadeUp
             number={2}
-            className="order-4 md:order-none lg:col-span-6 lg:row-span-1 "
+            className="
+              order-4 md:order-none
+              md:col-span-4 md:row-span-1
+              lg:col-span-6 lg:row-span-1
+            "
           >
             {isSmallScreen ? (
-              <div className="h-full min-h-[30rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+              <div className="relative h-full min-h-[30rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
                 <div className="w-full h-full absolute left-0 top-0 overflow-hidden">
                   <Image
                     src={Grid}
@@ -150,6 +171,7 @@ const Story: React.FC = () => {
                     priority
                   />
                 </div>
+
                 <div className="p-4 w-full max-w-xs pt-10">
                   <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
                     <CpuIcon className="h-12 w-12 origin-left transform-gpu text-neutral-400 transition-all duration-300 ease-in-out group-hover:scale-75" />
@@ -157,13 +179,12 @@ const Story: React.FC = () => {
                     <p className="text-sm max-w-lg text-neutral-200">
                       The Inside Scoop
                     </p>
-                    <h3
-                      className={`font-sans text-lgl max-w-96 font-bold z-10 text-white`}
-                    >
+                    <h3 className="font-sans text-lgl max-w-96 font-bold z-10 text-white">
                       Working on Cloud Technologies and DevOps Practices
                     </h3>
                   </div>
                 </div>
+
                 <div className="m-4">
                   <Terminal>
                     <TypingAnimation className="text-white" duration={150}>
@@ -172,6 +193,7 @@ const Story: React.FC = () => {
                     <AnimatedSpan delay={5800} className="text-blue-500">
                       Documents VSCode Projects
                     </AnimatedSpan>
+
                     <TypingAnimation className="text-white" duration={150}>
                       $ cd VSCode
                     </TypingAnimation>
@@ -181,6 +203,7 @@ const Story: React.FC = () => {
                     <AnimatedSpan delay={3200} className="text-green-500">
                       /home/user/VSCode
                     </AnimatedSpan>
+
                     <TypingAnimation className="text-white" duration={150}>
                       $ whoami
                     </TypingAnimation>
@@ -194,23 +217,29 @@ const Story: React.FC = () => {
               <SVGCard className="h-full min-h-[12rem]" />
             )}
           </FadeUp>
-          {/* Top-right small */}
+
+          {/* 3. Newsletter card (top-right small) */}
           <FadeUp
             number={3}
-            className="order-2 md:order-none overflow-hidden lg:col-span-3 lg:row-span-1"
+            className="
+              order-2 md:order-none
+              md:col-span-2 md:row-span-1
+              lg:col-span-3 lg:row-span-1
+              overflow-hidden
+            "
           >
-            <div className="h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
-              <p
-                className={`font-sans p-6 text-lg font-bold text-white text-center lg:text-xl`}
-              >
+            <div className="relative h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+              <p className="font-sans p-6 text-lg font-bold text-white text-center lg:text-xl">
                 Join My Newsletter
               </p>
+
               <div className="flex justify-center z-10 py-2">
                 <button className="px-8 py-2 pointer-events-auto cursor-pointer rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600">
-                  <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+                  <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
                   <span className="relative z-20">Go to Medium</span>
                 </button>
               </div>
+
               <Image
                 src={Medium}
                 alt="Contact Illustration"
@@ -222,19 +251,24 @@ const Story: React.FC = () => {
               />
             </div>
           </FadeUp>
-          {/* Mid-right small */}
+
+          {/* 4. CTA / Project card (mid-right small) */}
           <FadeUp
             number={4}
-            className="order-3 md:order-none lg:col-start-10 lg:col-end-13 lg:row-start-2 lg:row-end-3"
+            className="
+              order-3 md:order-none
+              md:col-span-2 md:row-span-1
+              lg:col-start-10 lg:col-end-13
+              lg:row-start-2 lg:row-end-3
+            "
           >
             <div className="relative flex h-full min-h-[12rem] flex-col">
               <BackgroundGradientAnimation>
-                <p
-                  className={`font-sans p-5 text-lg font-bold text-white text-center lg:text-xl`}
-                >
+                <p className="font-sans p-5 text-lg font-bold text-white text-center lg:text-xl">
                   Do you want to start a project together?
                 </p>
-                <div className="flex justify-center z-10 ">
+
+                <div className="flex justify-center z-10">
                   <MagicButton
                     title={
                       copied ? "Email is Copied!" : "Copy my email address"
@@ -253,21 +287,33 @@ const Story: React.FC = () => {
               </BackgroundGradientAnimation>
             </div>
           </FadeUp>
+
+          {/* 5. Central Hub / IconCloud (hidden on mobile, floats center on larger) */}
           {!isSmallScreen && (
             <FadeUp
               number={6}
-              className="order-6 md:order-none lg:col-start-5 lg:col-end-9 lg:row-start-2 lg:row-end-4"
+              className="
+                order-6 md:order-none
+                md:col-span-6 md:row-span-1
+                lg:col-start-5 lg:col-end-9
+                lg:row-start-2 lg:row-end-4
+              "
             >
-              {/* CENTRAL HUB (creates the inverted-radius illusion by sitting above the cards) */}
               <div className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-lg sm:max-w-md lg:max-w-lg">
                 <IconCloud images={images} />
               </div>
             </FadeUp>
           )}
-          {/* Bottom left wide */}
+
+          {/* 6. Bottom left wide */}
           <FadeUp
             number={5}
-            className="order-6 md:order-none lg:col-start-1 lg:col-end-7 lg:row-start-3 lg:row-end-4"
+            className="
+              order-6 md:order-none
+              md:col-span-3 md:row-span-1
+              lg:col-start-1 lg:col-end-7
+              lg:row-start-3 lg:row-end-4
+            "
           >
             {!isSmallScreen ? (
               <SVGCard
@@ -276,32 +322,40 @@ const Story: React.FC = () => {
                 className="h-full min-h-[12rem]"
               />
             ) : (
-              <div className="flex flex-col justify-center items-center w-full">
-                <div className="py-8 pt-1 text-center">
-                  <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
-                    <h3
-                      className={`font-sans text-lg max-w-96 font-bold z-10 text-white`}
-                    >
-                      Showcasing My Journey in IT Fields
-                    </h3>
+              <div className="relative h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+                <div className="flex flex-col justify-center items-center w-full my-5">
+                  <div className="py-8 pt-1 text-center">
+                    <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+                      <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
+                        Showcasing My Journey in IT Fields
+                      </h3>
+                    </div>
                   </div>
-                </div>
-                <div className="w-full">
-                  <InViewMount delay={1000}>
-                    <AnimatedList>
-                      {notifications.map((item, idx) => (
-                        <Notification {...item} key={idx + ""} />
-                      ))}
-                    </AnimatedList>
-                  </InViewMount>
+
+                  <div className="w-full my-4">
+                    <InViewMount delay={1000}>
+                      <AnimatedList>
+                        {notifications.map((item, idx) => (
+                          <Notification {...item} key={idx + ""} />
+                        ))}
+                      </AnimatedList>
+                    </InViewMount>
+                  </div>
                 </div>
               </div>
             )}
           </FadeUp>
-          {/* Bottom right wide */}
+
+          {/* 7. Bottom right wide */}
           <FadeUp
             number={6}
-            className="order-7 md:order-none lg:col-start-7 lg:col-end-13 lg:row-start-3 lg:row-end-4"
+            className="
+              order-7 md:order-none
+              sm:col-span-2
+              md:col-span-3 md:row-span-1
+              lg:col-start-7 lg:col-end-13
+              lg:row-start-3 lg:row-end-4
+            "
           >
             {!isSmallScreen ? (
               <SVGCard direction="left" className="h-full min-h-[12rem]" />
@@ -309,13 +363,12 @@ const Story: React.FC = () => {
               <div className="flex flex-col justify-center items-center w-full mt-10">
                 <div className="py-8 pt-1 text-center">
                   <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
-                    <h3
-                      className={`font-sans text-lg max-w-96 font-bold z-10 text-white`}
-                    >
+                    <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
                       Currently based in North America Time Zone
                     </h3>
                   </div>
                 </div>
+
                 <CanadaDottedMap />
               </div>
             )}

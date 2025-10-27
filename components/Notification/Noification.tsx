@@ -39,7 +39,7 @@ const Notification = ({ name, description, image, color, date }: Item) => {
   return (
     <div
       className={cn(
-        "relative mx-2  min-h-fit w-full max-w-[400px] cursor-pointer  rounded-2xl p-2",
+        "relative mx-2  cursor-pointer  rounded-2xl p-2",
         // animation styles
         "transition-all duration-200 ease-in-out hover:scale-[103%]",
         // light styles

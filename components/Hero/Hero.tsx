@@ -64,9 +64,8 @@ const Hero = () => {
                 <Image
                   src={hero}
                   alt="Right-profile portrait of Kamyab Rouhifar"
-                  fill
                   className="
-                  object-cover
+              
           w-full block rounded-2xl
           [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]
           [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]
