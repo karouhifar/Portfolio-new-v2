@@ -10,7 +10,7 @@ import { FadeUp } from "@/components/ui/FadeUp";
 
 export default function Home() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <NavBarSizeable>
         <div className="w-full max-w-7xl space-y-16 lg:space-y-24">
           <FadeUp amount={0.75}>

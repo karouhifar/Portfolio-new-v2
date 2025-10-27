@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6";
 import { IconType } from "react-icons";
@@ -10,6 +10,13 @@ import Image from "next/image";
 import { MdOutlineEmail } from "react-icons/md";
 
 type Social = { label: string; href: string; Icon: IconType };
+
+type FormState = {
+  toEmail: string;
+  firstName: string;
+  subject: string;
+  message: string;
+};
 
 interface Shape {
   color: string;
@@ -28,6 +35,13 @@ const socials: Social[] = [
   { label: "Instagram", href: "#", Icon: FaInstagram },
 ];
 
+const initialState: FormState = {
+  toEmail: "",
+  firstName: "",
+  subject: "",
+  message: "",
+};
+
 const fieldBase =
   "w-full px-4 py-3 bg-indigo-900/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400/50 transition-colors";
 const labelBase = "block mb-2 text-sm font-medium text-gray-900 text-white";
@@ -41,17 +55,48 @@ const fadeUp: Variants = {
   },
 };
 
+function formReducer(
+  state: FormState,
+  action: { field: keyof FormState; value: string }
+): FormState {
+  return {
+    ...state,
+    [action.field]: action.value,
+  };
+}
+
 export default function ContactSection({}: { email?: string }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
     "idle"
   );
 
+  const [state, dispatch] = useReducer(formReducer, initialState);
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
-    // TODO: wire to API route if needed
-    await new Promise((r) => setTimeout(r, 900));
-    setStatus("success");
+    console.log("Submitting form with data:", state);
+    const res = await fetch("/api/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        toEmail: state.toEmail,
+        firstName: state.firstName,
+        subject: state.subject,
+        message: state.message,
+      }),
+    });
+    if (!res.ok) {
+      const errorBody = await res.json().catch(() => ({}));
+      setStatus("idle");
+      throw new Error(
+        errorBody?.error || `Request failed with status ${res.status}`
+      );
+    }
+    const data = await res.json();
+    if (!data.ok) {
+      setStatus("idle");
+      throw new Error(data.error || "Unknown send error");
+    } else setStatus("success");
   }
 
   const AnimatedShape: React.FC<{ shape: Shape }> = ({ shape }) => {
@@ -228,6 +273,14 @@ export default function ContactSection({}: { email?: string }) {
                     name="name"
                     type="text"
                     placeholder="Your full name"
+                    required
+                    value={state.firstName}
+                    onChange={(e) =>
+                      dispatch({
+                        field: "firstName",
+                        value: e.target.value,
+                      })
+                    }
                     className={fieldBase}
                     whileFocus={{
                       boxShadow: "0 0 0 6px rgba(59,130,246,0.10)",
@@ -245,6 +298,13 @@ export default function ContactSection({}: { email?: string }) {
                     name="email"
                     type="email"
                     placeholder="you@example.com"
+                    value={state.toEmail}
+                    onChange={(e) =>
+                      dispatch({
+                        field: "toEmail",
+                        value: e.target.value,
+                      })
+                    }
                     className={fieldBase}
                     whileFocus={{
                       boxShadow: "0 0 0 6px rgba(59,130,246,0.10)",
@@ -262,8 +322,16 @@ export default function ContactSection({}: { email?: string }) {
                     id="subject"
                     name="subject"
                     type="text"
+                    required
                     placeholder="What’s this about?"
                     className={fieldBase}
+                    value={state.subject}
+                    onChange={(e) =>
+                      dispatch({
+                        field: "subject",
+                        value: e.target.value,
+                      })
+                    }
                     whileFocus={{
                       boxShadow: "0 0 0 6px rgba(59,130,246,0.10)",
                     }}
@@ -279,8 +347,16 @@ export default function ContactSection({}: { email?: string }) {
                     id="message"
                     name="message"
                     rows={5}
+                    required
                     placeholder="Write your message..."
                     className={fieldBase + " resize-y"}
+                    value={state.message}
+                    onChange={(e) =>
+                      dispatch({
+                        field: "message",
+                        value: e.target.value,
+                      })
+                    }
                     whileFocus={{
                       boxShadow: "0 0 0 6px rgba(59,130,246,0.10)",
                     }}
@@ -298,8 +374,8 @@ export default function ContactSection({}: { email?: string }) {
                   {status === "success"
                     ? "Message sent ✓"
                     : status === "submitting"
-                    ? "Sending…"
-                    : "Send message"}
+                      ? "Sending…"
+                      : "Send message"}
                 </motion.button>
               </motion.form>
             </div>

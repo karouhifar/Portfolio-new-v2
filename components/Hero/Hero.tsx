@@ -10,17 +10,13 @@ import hero from "@/public/images/hero-profile.png";
 const Hero = () => {
   return (
     <section className="relative w-full bg-background/60 pb-20 pt-28 md:pt-36">
-      <div className="overflow-x-hidden">
-        <Spotlight
-          className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen "
-          fill="white"
-        />
-        <Spotlight
-          className="h-[80vh] w-[50vw] top-10 left-full"
-          fill="purple"
-        />
-        <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
-      </div>
+      <Spotlight
+        className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen "
+        fill="white"
+      />
+      <Spotlight className="h-[80vh] w-[50vw] top-10 left-full" fill="purple" />
+      <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
+
       <div className="relative z-10">
         <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-10">

@@ -10,10 +10,47 @@ import { FadeUp } from "./FadeUp";
 import { AnimatedList } from "./AnimatedItemList";
 import { InViewMount } from "./InViewMount";
 import Notification, { notifications } from "../Notification/Noification";
+import { button } from "motion/react-client";
 
-type Dir = "left" | "right" | "center" | undefined;
+type Dir = "left" | "right" | "center" | "top" | "bottom" | undefined;
 
 const SHAPES = {
+  top: {
+    w: 1133,
+    h: 412,
+    // your TOP variant
+    d: "M723.303 383.318C726.722 399.098 739.679 412 755.826 412H1103C1119.57 412 1133 398.569 1133 382V30C1133 13.4315 1119.57 0 1103 0H30C13.4315 0 0 13.4315 0 30V382C0 398.569 13.4315 412 30 412L372.174 412C388.321 412 401.278 399.098 404.698 383.318C420.595 309.957 485.879 255 564 255C642.121 255 707.406 309.957 723.303 383.318Z",
+    evenOdd: false,
+    feature: {
+      Icon: MapPin,
+      name: "Toronto, Canada",
+      description: "Location",
+      className: "col-span-3 lg:col-span-1",
+      direction: "left",
+      href: "#",
+      cta: "Learn more",
+      background: <Globe className="top-18" />,
+      title: null,
+    },
+  },
+  bottom: {
+    w: 1133,
+    h: 412,
+    // your BOTTOM variant
+    d: "M409.697 28.6823C406.278 12.9021 393.321 0 377.174 0H30C13.4315 0 0 13.4315 0 30V382C0 398.569 13.4314 412 30 412H1103C1119.57 412 1133 398.569 1133 382V30C1133 13.4315 1119.57 0 1103 0L760.826 0C744.679 0 731.722 12.9021 728.302 28.6822C712.405 102.043 647.121 157 569 157C490.879 157 425.594 102.043 409.697 28.6823Z",
+    evenOdd: false,
+    feature: {
+      Icon: MapPin,
+      name: "Toronto, Canada",
+      description: "Location",
+      className: "col-span-3 lg:col-span-1",
+      direction: "left",
+      href: "#",
+      cta: "Learn more",
+      background: <Globe className="top-18" />,
+      title: null,
+    },
+  },
   left: {
     w: 554,
     h: 412,
@@ -130,12 +167,16 @@ const SVGCard: React.FC<{
       ? SHAPES.left
       : direction === "right"
       ? SHAPES.right
-      : SHAPES.center;
+      : direction === "center"
+      ? SHAPES.center
+      : direction === "top"
+      ? SHAPES.top
+      : SHAPES.bottom;
   const { w, h, d, evenOdd } = shape;
   return (
     <div className={cn("relative w-full h-full", className)}>
       <svg
-        className={cn("absolute inset-0")}
+        className={cn("absolute inset-0 ")}
         viewBox={`0 0 ${w} ${h}`}
         preserveAspectRatio="xMidYMid meet"
         fill="none"

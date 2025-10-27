@@ -76,6 +76,7 @@ const Story: React.FC = () => {
 
   // mobile & small screens
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const isMediumScreen = useMediaQuery("(max-width: 1024px)");
 
   return (
     <section className="w-full py-12 sm:py-16 lg:py-20">
@@ -88,11 +89,12 @@ const Story: React.FC = () => {
             gap-6 sm:gap-8
             grid-cols-1
             sm:grid-cols-2
-            sm:grid-rows-2
+            sm:grid-rows-1
+            md:grid-rows-3
             md:grid-cols-6
+            md:auto-rows-[90px]
             lg:grid-cols-12
-            auto-rows-[minmax(1rem,auto)]
-            md:auto-rows-[minmax(14rem,auto)]
+            lg:auto-rows-auto
           "
           style={
             {
@@ -107,7 +109,7 @@ const Story: React.FC = () => {
             className="
               order-1 md:order-none
               sm:row-span-2
-              md:col-span-2 md:row-span-2
+              md:col-span-3 md:row-span-2
               lg:col-span-3 lg:row-span-2
             "
           >
@@ -148,13 +150,12 @@ const Story: React.FC = () => {
               </div>
             </div>
           </FadeUp>
-
           {/* 2. Inside Scoop / SVGCard (center top wide) */}
           <FadeUp
             number={2}
             className="
-              order-4 md:order-none
-              md:col-span-4 md:row-span-1
+              order-4 lg:order-none
+              md:col-span-6 md:row-span-1
               lg:col-span-6 lg:row-span-1
             "
           >
@@ -214,16 +215,18 @@ const Story: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <SVGCard className="h-full min-h-[12rem]" />
+              <SVGCard
+                direction={isMediumScreen ? "top" : "center"}
+                className="h-full min-h-[12rem]"
+              />
             )}
           </FadeUp>
-
           {/* 3. Newsletter card (top-right small) */}
           <FadeUp
             number={3}
             className="
-              order-2 md:order-none
-              md:col-span-2 md:row-span-1
+              order-2 lg:order-none
+              md:col-span-3 md:row-span-1
               lg:col-span-3 lg:row-span-1
               overflow-hidden
             "
@@ -251,13 +254,12 @@ const Story: React.FC = () => {
               />
             </div>
           </FadeUp>
-
           {/* 4. CTA / Project card (mid-right small) */}
           <FadeUp
             number={4}
             className="
-              order-3 md:order-none
-              md:col-span-2 md:row-span-1
+              order-3 lg:order-none
+              md:col-span-3 md:row-span-1
               lg:col-start-10 lg:col-end-13
               lg:row-start-2 lg:row-end-3
             "
@@ -287,92 +289,95 @@ const Story: React.FC = () => {
               </BackgroundGradientAnimation>
             </div>
           </FadeUp>
-
           {/* 5. Central Hub / IconCloud (hidden on mobile, floats center on larger) */}
           {!isSmallScreen && (
             <FadeUp
               number={6}
               className="
-                order-6 md:order-none
-                md:col-span-6 md:row-span-1
+                order-6 lg:order-none
+                md:col-span-6 
                 lg:col-start-5 lg:col-end-9
                 lg:row-start-2 lg:row-end-4
               "
             >
-              <div className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-lg sm:max-w-md lg:max-w-lg">
+              <div className="relative mx-auto flex w-full max-w-sm items-center justify-center rounded-lg md:max-w-xs lg:max-w-lg">
                 <IconCloud images={images} />
               </div>
             </FadeUp>
           )}
 
-          {/* 6. Bottom left wide */}
-          <FadeUp
-            number={5}
-            className="
-              order-6 md:order-none
+          <React.Fragment>
+            {" "}
+            {/* 6. Bottom left wide */}
+            <FadeUp
+              number={5}
+              className="
+              order-6 lg:order-none
               md:col-span-3 md:row-span-1
+              lg:col-span-3
               lg:col-start-1 lg:col-end-7
               lg:row-start-3 lg:row-end-4
             "
-          >
-            {!isSmallScreen ? (
-              <SVGCard
-                title={"Located at North America Time Zone"}
-                direction="right"
-                className="h-full min-h-[12rem]"
-              />
-            ) : (
-              <div className="relative h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
-                <div className="flex flex-col justify-center items-center w-full my-5">
+            >
+              {!isSmallScreen ? (
+                <SVGCard
+                  title={"Located at North America Time Zone"}
+                  direction="right"
+                  className="h-full min-h-[12rem]"
+                />
+              ) : (
+                <div className="relative h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+                  <div className="flex flex-col justify-center items-center w-full my-5">
+                    <div className="py-8 pt-1 text-center">
+                      <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+                        <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
+                          Showcasing My Journey in IT Fields
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="w-full my-4">
+                      <InViewMount delay={1000}>
+                        <AnimatedList>
+                          {notifications.map((item, idx) => (
+                            <Notification {...item} key={idx + ""} />
+                          ))}
+                        </AnimatedList>
+                      </InViewMount>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </FadeUp>
+            {/* 7. Bottom right wide */}
+            <FadeUp
+              number={6}
+              className="
+              order-7 lg:order-none
+              sm:col-span-2
+              md:col-span-3 md:row-span-1
+              lg:col-span-3
+              lg:col-start-7 lg:col-end-13
+              lg:row-start-3 lg:row-end-4
+            "
+            >
+              {!isSmallScreen ? (
+                <SVGCard direction="left" className="h-full min-h-[12rem]" />
+              ) : (
+                <div className="flex flex-col justify-center items-center w-full mt-10">
                   <div className="py-8 pt-1 text-center">
                     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
                       <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
-                        Showcasing My Journey in IT Fields
+                        Currently based in North America Time Zone
                       </h3>
                     </div>
                   </div>
 
-                  <div className="w-full my-4">
-                    <InViewMount delay={1000}>
-                      <AnimatedList>
-                        {notifications.map((item, idx) => (
-                          <Notification {...item} key={idx + ""} />
-                        ))}
-                      </AnimatedList>
-                    </InViewMount>
-                  </div>
+                  <CanadaDottedMap />
                 </div>
-              </div>
-            )}
-          </FadeUp>
-
-          {/* 7. Bottom right wide */}
-          <FadeUp
-            number={6}
-            className="
-              order-7 md:order-none
-              sm:col-span-2
-              md:col-span-3 md:row-span-1
-              lg:col-start-7 lg:col-end-13
-              lg:row-start-3 lg:row-end-4
-            "
-          >
-            {!isSmallScreen ? (
-              <SVGCard direction="left" className="h-full min-h-[12rem]" />
-            ) : (
-              <div className="flex flex-col justify-center items-center w-full mt-10">
-                <div className="py-8 pt-1 text-center">
-                  <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
-                    <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
-                      Currently based in North America Time Zone
-                    </h3>
-                  </div>
-                </div>
-
-                <CanadaDottedMap />
-              </div>
-            )}
-          </FadeUp>
+              )}
+            </FadeUp>
+          </React.Fragment>
         </div>
       </div>
     </section>

@@ -88,9 +88,7 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      <main
-        className="mx-auto flex w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8"
-      >
+      <main className="mx-auto flex w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 ">
         {children}
       </main>
 

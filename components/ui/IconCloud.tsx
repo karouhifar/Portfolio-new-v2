@@ -1,5 +1,6 @@
 "use client";
 
+import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import React, { useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
 
@@ -28,6 +29,7 @@ export function IconCloud({ icons, images }: IconCloudProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const isMediumScreen = useMediaQuery("(max-width: 1024px)");
   const [targetRotation, setTargetRotation] = useState<{
     x: number;
     y: number;
@@ -310,13 +312,13 @@ export function IconCloud({ icons, images }: IconCloudProps) {
   return (
     <canvas
       ref={canvasRef}
-      width={300}
-      height={300}
+      width={isMediumScreen ? 380 : 350}
+      height={isMediumScreen ? 380 : 350}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      className="rounded-lg absolute left-1/2 top-[53%] z-10 -translate-x-1/2 -translate-y-1/2"
+      className="w-full rounded-lg relative lg:absolute left-1/2 top-30 lg:top-56 z-10 -translate-x-1/2 -translate-y-1/2"
       aria-label="Interactive 3D Icon Cloud"
       role="img"
     />
