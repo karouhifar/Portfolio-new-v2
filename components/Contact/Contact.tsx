@@ -8,6 +8,8 @@ import GlassEffect from "../ui/GlassEffect";
 import CNtower from "@/public/images/cntower.png";
 import Image from "next/image";
 import { MdOutlineEmail } from "react-icons/md";
+import Swal from "sweetalert2";
+import { fire } from "@/lib/swal";
 
 type Social = { label: string; href: string; Icon: IconType };
 
@@ -88,6 +90,12 @@ export default function ContactSection({}: { email?: string }) {
     if (!res.ok) {
       const errorBody = await res.json().catch(() => ({}));
       setStatus("idle");
+      fire({
+        title: `Sorry, we couldn't send your message. Please try again.`,
+        icon: "error",
+        theme: "dark",
+      });
+
       throw new Error(
         errorBody?.error || `Request failed with status ${res.status}`
       );
@@ -95,6 +103,12 @@ export default function ContactSection({}: { email?: string }) {
     const data = await res.json();
     if (!data.ok) {
       setStatus("idle");
+      fire({
+        title: `Sorry, we couldn't send your message. Please try again.`,
+        icon: "error",
+        theme: "dark",
+      });
+
       throw new Error(data.error || "Unknown send error");
     } else setStatus("success");
   }
@@ -265,6 +279,7 @@ export default function ContactSection({}: { email?: string }) {
               >
                 {/* Name */}
                 <div>
+                  ioryhhgrwrjri;]\kpojfwuygyu
                   <label htmlFor="name" className={labelBase}>
                     Name
                   </label>
