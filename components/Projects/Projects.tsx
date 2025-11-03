@@ -70,6 +70,7 @@ const Projects = () => {
 
                 <a
                   href={item.link}
+                  target="__blank"
                   className="flex items-center gap-3 text-sm font-medium text-purple md:text-base lg:text-lg"
                 >
                   <span className="text-white">Check Live Site</span>
