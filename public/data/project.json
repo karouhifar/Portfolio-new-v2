@@ -2,6 +2,7 @@
   {
     "id": 1,
     "title": "DreamDigital",
+    "link": "https://dreamsdigital.ca",
     "image": "https://d39oted90y97ty.cloudfront.net/projects/Dreamdigital.png",
     "technologies": [
       {
@@ -30,6 +31,7 @@
   {
     "id": 2,
     "title": "YouTube Analyzer",
+    "link": "https://youtubeanalyzer.tech/",
     "image": "https://d39oted90y97ty.cloudfront.net/projects/YoutubeAnalyzer.png",
     "technologies": [
       {
@@ -58,6 +60,7 @@
   {
     "id": 3,
     "title": "MediaKits",
+    "link": "https://www.producthunt.com/products/mediakits",
     "image": "https://d39oted90y97ty.cloudfront.net/projects/Mediakits.png",
     "technologies": [
       {
@@ -86,6 +89,7 @@
   {
     "id": 4,
     "title": "Covid-19 Tracker Website",
+    "link": "https://covid19-track.web.app/",
     "image": "https://d39oted90y97ty.cloudfront.net/projects/Covid-19.png",
     "technologies": [
       {
