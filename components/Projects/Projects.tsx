@@ -7,8 +7,11 @@ import Image from "next/image";
 const Projects = () => {
   return (
     <section className="w-full md:py-20 lg:py-24">
-      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <h2 className="text-balance text-center text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
+      <div
+        className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8"
+        id="projects"
+      >
+        <h2 className="text-balance text-center text-3xl font-semibold text-white sm:text-4xl lg:text-5xl mt-48">
           A small selection of{" "}
           <span className="text-purple">recent projects</span>
         </h2>

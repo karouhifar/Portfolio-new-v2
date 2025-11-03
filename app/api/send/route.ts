@@ -1,12 +1,11 @@
 import { EmailTemplate } from "@/components/Email/EmailTemplate";
-import { NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // This will be called when you GET /api/send
-export async function GET(req: NextRequest) {
+export async function GET() {
   return NextResponse.json({
     message: `Hello world!`,
   });

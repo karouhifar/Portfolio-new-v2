@@ -1,12 +1,12 @@
 // app/components/Footer.tsx
 "use client";
 
-import Link from "next/link";
-import { FaGithub, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { FaGithub, FaLinkedin, FaMedium, FaXTwitter } from "react-icons/fa6";
 import { HiPhoneArrowUpRight } from "react-icons/hi2";
 import type { IconType } from "react-icons";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
+import ScheduleButton from "../ui/ScheduleButton";
 
 type Social = {
   href: string;
@@ -15,10 +15,18 @@ type Social = {
 };
 
 const SOCIALS: Social[] = [
-  { href: "#", label: "Instagram", Icon: FaInstagram },
-  { href: "#", label: "X (Twitter)", Icon: FaXTwitter },
-  { href: "#", label: "GitHub", Icon: FaGithub },
-  { href: "#", label: "LinkedIn", Icon: FaLinkedin },
+  {
+    href: "https://medium.com/@karouhifar",
+    label: "Medium",
+    Icon: FaMedium,
+  },
+  { href: "https://x.com/KRouhifar", label: "X (Twitter)", Icon: FaXTwitter },
+  { href: "https://github.com/karouhifar", label: "GitHub", Icon: FaGithub },
+  {
+    href: "https://www.linkedin.com/in/kamyab-rouhifar/",
+    label: "LinkedIn",
+    Icon: FaLinkedin,
+  },
 ];
 
 export default function Footer() {
@@ -60,21 +68,28 @@ export default function Footer() {
         <p className="mb-10 max-w-2xl text-balance text-white/70">
           Reach out and let’s chat about how I can help you hit your goals.
         </p>
-
-        <Link
-          href="/contact"
-          className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-6 py-3 text-white/90 shadow-lg backdrop-blur transition hover:bg-white/15"
-        >
-          Contact Me Now
-          <HiPhoneArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </Link>
+        <ScheduleButton url="https://calendly.com/karouhifar/interviewing-with-kamyab">
+          <div className="group flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-6 py-3 text-white/90 shadow-lg backdrop-blur transition hover:bg-white/15">
+            Contact Me Now
+            <HiPhoneArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </div>
+        </ScheduleButton>
       </div>
 
       {/* Bottom bar */}
       <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-4 pb-8 text-center sm:px-6 md:flex-row md:gap-0 md:text-left">
         <p className="text-sm text-white/60">
           Copyright ©{year}{" "}
-          <span className="text-white/80">Kamyab Rouhifar</span>
+          <span className="text-white/80">
+            Powered by{" "}
+            <a
+              className="text-blue-500"
+              href="https://dreamsDigital.ca"
+              target="__blank"
+            >
+              DreamsDigital.ca
+            </a>
+          </span>
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">

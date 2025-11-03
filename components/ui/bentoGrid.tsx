@@ -1,7 +1,5 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { ArrowRightIcon } from "lucide-react";
-import MagicButton from "./MagicButton";
 
 interface BentoGridProps extends ComponentPropsWithoutRef<"div"> {
   children: ReactNode;

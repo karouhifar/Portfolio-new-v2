@@ -11,16 +11,17 @@ import {
   MobileNavMenu,
 } from "@/components/ui/Navbar";
 import { useState } from "react";
+import ScheduleButton from "../ui/ScheduleButton";
 
 export function NavBarSizeable({ children }: { children: React.ReactNode }) {
   const navItems = [
     {
-      name: "Features",
-      link: "#features",
+      name: "Story",
+      link: "#story",
     },
     {
-      name: "Pricing",
-      link: "#pricing",
+      name: "Projects",
+      link: "#projects",
     },
     {
       name: "Contact",
@@ -38,10 +39,9 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
           <NavbarLogo />
           <NavItems items={navItems} className="max-w-md" />
           <div className="hidden items-center gap-3 lg:flex">
-            <NavbarButton variant="secondary" className="hidden sm:inline-flex">
-              Login
+            <NavbarButton variant="primary">
+              <ScheduleButton url="https://calendly.com/karouhifar/interviewing-with-kamyab" />
             </NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
           </div>
         </NavBody>
 

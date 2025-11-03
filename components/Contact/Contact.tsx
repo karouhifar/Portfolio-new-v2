@@ -8,7 +8,6 @@ import GlassEffect from "../ui/GlassEffect";
 import CNtower from "@/public/images/cntower.png";
 import Image from "next/image";
 import { MdOutlineEmail } from "react-icons/md";
-import Swal from "sweetalert2";
 import { fire } from "@/lib/swal";
 
 type Social = { label: string; href: string; Icon: IconType };
@@ -76,7 +75,7 @@ export default function ContactSection({}: { email?: string }) {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
-    console.log("Submitting form with data:", state);
+
     const res = await fetch("/api/send", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -110,7 +109,17 @@ export default function ContactSection({}: { email?: string }) {
       });
 
       throw new Error(data.error || "Unknown send error");
-    } else setStatus("success");
+    } else {
+      fire({
+        title: `Message sent successfully! I'll get back to you soon.`,
+        icon: "success",
+        theme: "dark",
+      });
+      setStatus("success");
+      setTimeout(() => {
+        setStatus("idle");
+      }, 2000);
+    }
   }
 
   const AnimatedShape: React.FC<{ shape: Shape }> = ({ shape }) => {
@@ -164,7 +173,10 @@ export default function ContactSection({}: { email?: string }) {
   };
 
   return (
-    <section className="relative mx-auto w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <section
+      className="relative mx-auto w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+      id="contact"
+    >
       {/* Background: deep navy + grid + soft glow */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <AnimatePresence>

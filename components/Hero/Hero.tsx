@@ -40,7 +40,7 @@ const Hero = () => {
               </p>
 
               <div className="mt-6 flex justify-center lg:justify-start">
-                <a href="#about">
+                <a href="#projects">
                   <MagicButton
                     title="Show my work"
                     icon={<FaLocationArrow />}

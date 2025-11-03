@@ -79,7 +79,7 @@ const Story: React.FC = () => {
   const isMediumScreen = useMediaQuery("(max-width: 1024px)");
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20">
+    <section className="w-full py-12 sm:py-16 lg:py-20" id="story">
       <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         {/* Responsive grid wrapper */}
         <div
@@ -237,7 +237,12 @@ const Story: React.FC = () => {
               </p>
 
               <div className="flex justify-center z-10 py-2">
-                <button className="px-8 py-2 pointer-events-auto cursor-pointer rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600">
+                <button
+                  onClick={() =>
+                    window.open("https://medium.com/@karouhifar", "_blank")
+                  }
+                  className="px-8 py-2 pointer-events-auto cursor-pointer rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
+                >
                   <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
                   <span className="relative z-20">Go to Medium</span>
                 </button>
@@ -264,7 +269,7 @@ const Story: React.FC = () => {
               lg:row-start-2 lg:row-end-3
             "
           >
-            <div className="relative flex h-full min-h-[12rem] flex-col">
+            <div className="relative flex h-full min-h-[12rem] flex-col -z-20">
               <BackgroundGradientAnimation>
                 <p className="font-sans p-5 text-lg font-bold text-white text-center lg:text-xl">
                   Do you want to start a project together?
@@ -277,13 +282,15 @@ const Story: React.FC = () => {
                     }
                     icon={<IoCopyOutline />}
                     position="left"
-                    handleClick={() => {
-                      const text = "karouhifar@gmail.com";
-                      navigator.clipboard.writeText(text);
-                      setCopied(true);
+                    handleClick={async () => {
+                      if (window.isSecureContext && navigator.clipboard) {
+                        const text = "karouhifar@gmail.com";
+                        await navigator.clipboard.writeText(text);
+                        setCopied(true);
+                      }
                     }}
-                    className="md:mt-5 w-50 m-4"
-                    otherClasses="!bg-[#161A31] px-4 py-2 text-xs md:text-base"
+                    className="md:mt-5 w-full m-4 whitespace-nowrap"
+                    otherClasses="!bg-[#161A31] px-2 py-2 text-xs md:text-base"
                   />
                 </div>
               </BackgroundGradientAnimation>

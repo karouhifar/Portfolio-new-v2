@@ -19,14 +19,14 @@ export default function CanadaDottedMap() {
     shape: "circle", // "circle" | "hexagon"
     backgroundColor: "transparent",
   });
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const coordinate = useMemo(() => {
     const svgW = map.image.width;
     const svgH = map.image.height;
     const topPercent = (torontoPoint.y / svgH + 0.09) * 100;
     const leftPercent = (torontoPoint.x / svgW) * 100;
     return { topPercent, leftPercent };
-  }, []);
+  }, [map.image.width, map.image.height]);
 
   return (
     <div className="relative inline-block">

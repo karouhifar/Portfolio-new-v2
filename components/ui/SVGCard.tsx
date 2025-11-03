@@ -10,7 +10,6 @@ import { FadeUp } from "./FadeUp";
 import { AnimatedList } from "./AnimatedItemList";
 import { InViewMount } from "./InViewMount";
 import Notification, { notifications } from "../Notification/Noification";
-import { button } from "motion/react-client";
 
 type Dir = "left" | "right" | "center" | "top" | "bottom" | undefined;
 
@@ -166,12 +165,12 @@ const SVGCard: React.FC<{
     direction === "left"
       ? SHAPES.left
       : direction === "right"
-      ? SHAPES.right
-      : direction === "center"
-      ? SHAPES.center
-      : direction === "top"
-      ? SHAPES.top
-      : SHAPES.bottom;
+        ? SHAPES.right
+        : direction === "center"
+          ? SHAPES.center
+          : direction === "top"
+            ? SHAPES.top
+            : SHAPES.bottom;
   const { w, h, d, evenOdd } = shape;
   return (
     <div className={cn("relative w-full h-full", className)}>
