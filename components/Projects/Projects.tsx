@@ -11,7 +11,7 @@ const Projects = () => {
         className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8"
         id="projects"
       >
-        <h2 className="text-balance text-center text-3xl font-semibold text-white sm:text-4xl lg:text-5xl mt-48">
+        <h2 className="text-balance text-center text-3xl font-semibold text-white sm:text-4xl lg:text-5xl lg:mt-20">
           A small selection of{" "}
           <span className="text-purple">recent projects</span>
         </h2>
