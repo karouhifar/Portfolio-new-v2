@@ -291,7 +291,6 @@ export default function ContactSection({}: { email?: string }) {
               >
                 {/* Name */}
                 <div>
-                  ioryhhgrwrjri;]\kpojfwuygyu
                   <label htmlFor="name" className={labelBase}>
                     Name
                   </label>

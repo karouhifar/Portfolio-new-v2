@@ -17,9 +17,8 @@ export async function POST(req: NextRequest) {
     // (optional) read data from request body, e.g. contact form submission
     const body = await req.json();
     const { toEmail, firstName, message, subject } = body;
-
     const { data, error } = await resend.emails.send({
-      from: process.env.FROM_EMAIL as string, // MUST be a verified sender/domain
+      from: `Kamyab Rouhifar <${process.env.FROM_EMAIL as string}>`, // MUST be a verified sender/domain
       to: [toEmail], // test inbox Resend provides
       subject: subject ?? "Hello from Next.js + Resend",
       // Option A: use React template
