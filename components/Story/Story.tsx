@@ -79,20 +79,17 @@ const Story: React.FC = () => {
   const isMediumScreen = useMediaQuery("(max-width: 1024px)");
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20" id="story">
+    <section className="w-full py-10 sm:py-14 lg:py-20" id="story">
       <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         {/* Responsive grid wrapper */}
         <div
           className="
             relative
             grid
-            gap-6 sm:gap-8
+            gap-4 sm:gap-6 lg:gap-8
             grid-cols-1
             sm:grid-cols-2
-            sm:grid-rows-1
-            md:grid-rows-3
             md:grid-cols-6
-            md:auto-rows-[90px]
             lg:grid-cols-12
             lg:auto-rows-auto
           "
@@ -113,35 +110,38 @@ const Story: React.FC = () => {
               lg:col-span-3 lg:row-span-2
             "
           >
-            <div className="grid grid-cols-4 grid-rows-[100px_1fr] rounded-3xl h-full md:h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
-              <div className="relative w-30 flex-none row-span-3 col-span-1">
+            <div className="grid grid-cols-[auto_1fr] sm:grid-cols-[5rem_1fr] md:grid-cols-[6rem_1fr] grid-rows-[auto_1fr] rounded-3xl h-full border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)] overflow-hidden">
+              {/* Icon column */}
+              <div className="relative w-16 sm:w-20 md:w-24 row-span-2 self-stretch">
                 <Image
                   src={Icon}
                   alt="Cloud Icon"
-                  className={cn("absolute inset-0 w-full")}
+                  className={cn("absolute inset-0 w-full h-full object-contain")}
                   priority
                 />
               </div>
 
-              <div className="py-5 ml-10 col-span-3">
-                <p className="font-sans text-lg lg:text-2xl font-bold text-white">
+              {/* Title area */}
+              <div className="py-4 sm:py-5 px-2 sm:px-3">
+                <p className="font-sans text-base sm:text-lg lg:text-2xl font-bold text-white">
                   Toolbox
                 </p>
-                <p className="text-neutral-200 opacity-60">
+                <p className="text-neutral-200 opacity-60 text-xs sm:text-sm">
                   What I reach for daily
                 </p>
               </div>
 
+              {/* Chips */}
               <div
                 role="tablist"
                 aria-label="Toolbox filters"
-                className="flex flex-col w-36 col-start-2 col-span-4 gap-y-5 m-2 mx-10 z-50"
+                className="col-start-2 flex flex-col gap-y-3 sm:gap-y-4 p-3 sm:p-4 md:px-5 z-50"
               >
                 {chips.map((item, i) => (
                   <React.Fragment key={`${groupId}-frag-${i}`}>
                     <button
                       role="tab"
-                      className="p-1 text-xs md:text-sm rounded-xl font-medium block mb-0 ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
+                      className="w-full max-w-[180px] p-1 sm:p-1.5 text-xs md:text-sm rounded-xl font-medium block ring-1 ring-white/10 bg-white/5 text-slate-200/90 transition-colors hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7a3ff2]/50"
                     >
                       {item}
                     </button>
@@ -155,12 +155,13 @@ const Story: React.FC = () => {
             number={2}
             className="
               order-4 lg:order-none
+              sm:col-span-2
               md:col-span-6 md:row-span-1
               lg:col-span-6 lg:row-span-1
             "
           >
             {isSmallScreen ? (
-              <div className="relative h-full min-h-[30rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+              <div className="relative h-full min-h-[26rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
                 <div className="w-full h-full absolute left-0 top-0 overflow-hidden">
                   <Image
                     src={Grid}
@@ -173,20 +174,20 @@ const Story: React.FC = () => {
                   />
                 </div>
 
-                <div className="p-4 w-full max-w-xs pt-10">
+                <div className="p-4 w-full max-w-xs pt-8">
                   <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
-                    <CpuIcon className="h-12 w-12 origin-left transform-gpu text-neutral-400 transition-all duration-300 ease-in-out group-hover:scale-75" />
+                    <CpuIcon className="h-10 w-10 origin-left transform-gpu text-neutral-400 transition-all duration-300 ease-in-out group-hover:scale-75" />
 
                     <p className="text-sm max-w-lg text-neutral-200">
                       The Inside Scoop
                     </p>
-                    <h3 className="font-sans text-lgl max-w-96 font-bold z-10 text-white">
+                    <h3 className="font-sans text-base max-w-96 font-bold z-10 text-white">
                       Working on Cloud Technologies and DevOps Practices
                     </h3>
                   </div>
                 </div>
 
-                <div className="m-4">
+                <div className="mx-3 mb-3 sm:mx-4 sm:mb-4">
                   <Terminal>
                     <TypingAnimation className="text-white" duration={150}>
                       $ ls
@@ -231,8 +232,8 @@ const Story: React.FC = () => {
               overflow-hidden
             "
           >
-            <div className="relative h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
-              <p className="font-sans p-6 text-lg font-bold text-white text-center lg:text-xl">
+            <div className="relative h-full min-h-[10rem] sm:min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
+              <p className="font-sans p-4 sm:p-6 text-base sm:text-lg font-bold text-white text-center lg:text-xl">
                 Join My Newsletter
               </p>
 
@@ -241,7 +242,7 @@ const Story: React.FC = () => {
                   onClick={() =>
                     window.open("https://medium.com/@karouhifar", "_blank")
                   }
-                  className="px-8 py-2 pointer-events-auto cursor-pointer rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
+                  className="px-6 sm:px-8 py-2 pointer-events-auto cursor-pointer rounded-full relative bg-slate-700 text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
                 >
                   <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
                   <span className="relative z-20">Go to Medium</span>
@@ -252,7 +253,7 @@ const Story: React.FC = () => {
                 src={Medium}
                 alt="Contact Illustration"
                 className={cn(
-                  "absolute -right-5 md:-right-10 bottom-5 w-32 md:w-48 opacity-20",
+                  "absolute -right-5 md:-right-10 bottom-3 sm:bottom-5 w-28 sm:w-32 md:w-48 opacity-20",
                   "object-cover object-center"
                 )}
                 priority
@@ -269,9 +270,9 @@ const Story: React.FC = () => {
               lg:row-start-2 lg:row-end-3
             "
           >
-            <div className="relative flex h-full min-h-[12rem] flex-col -z-20">
+            <div className="relative flex h-full min-h-[10rem] sm:min-h-[12rem] flex-col -z-20">
               <BackgroundGradientAnimation>
-                <p className="font-sans p-5 text-lg font-bold text-white text-center lg:text-xl">
+                <p className="font-sans p-4 sm:p-5 text-base sm:text-lg font-bold text-white text-center lg:text-xl">
                   Do you want to start a project together?
                 </p>
 
@@ -289,8 +290,8 @@ const Story: React.FC = () => {
                         setCopied(true);
                       }
                     }}
-                    className="md:mt-5 w-full m-4 whitespace-nowrap"
-                    otherClasses="!bg-[#161A31] px-2 py-2 text-xs md:text-base"
+                    className="md:mt-5 w-full m-3 sm:m-4 whitespace-nowrap"
+                    otherClasses="!bg-[#161A31] px-2 py-2 text-xs sm:text-sm md:text-base"
                   />
                 </div>
               </BackgroundGradientAnimation>
@@ -320,6 +321,7 @@ const Story: React.FC = () => {
               number={5}
               className="
               order-6 lg:order-none
+              sm:col-span-2
               md:col-span-3 md:row-span-1
               lg:col-span-3
               lg:col-start-1 lg:col-end-7
@@ -335,15 +337,15 @@ const Story: React.FC = () => {
               ) : (
                 <div className="relative h-full min-h-[12rem] rounded-3xl border border-white/5 bg-[#1D1D3B] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),0_20px_50px_-20px_rgba(0,0,0,0.6)]">
                   <div className="flex flex-col justify-center items-center w-full my-5">
-                    <div className="py-8 pt-1 text-center">
+                    <div className="py-6 pt-1 text-center">
                       <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
-                        <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
+                        <h3 className="font-sans text-base sm:text-lg max-w-96 font-bold z-10 text-white px-4">
                           Showcasing My Journey in IT Fields
                         </h3>
                       </div>
                     </div>
 
-                    <div className="w-full my-4">
+                    <div className="w-full my-3">
                       <InViewMount delay={1000}>
                         <AnimatedList>
                           {notifications.map((item, idx) => (
@@ -371,10 +373,10 @@ const Story: React.FC = () => {
               {!isSmallScreen ? (
                 <SVGCard direction="left" className="h-full min-h-[12rem]" />
               ) : (
-                <div className="flex flex-col justify-center items-center w-full mt-10">
-                  <div className="py-8 pt-1 text-center">
+                <div className="flex flex-col justify-center items-center w-full mt-6">
+                  <div className="py-6 pt-1 text-center">
                     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
-                      <h3 className="font-sans text-lg max-w-96 font-bold z-10 text-white">
+                      <h3 className="font-sans text-base sm:text-lg max-w-96 font-bold z-10 text-white px-4">
                         Currently based in North America Time Zone
                       </h3>
                     </div>

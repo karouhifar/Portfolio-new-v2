@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CpuIcon, MapPin } from "lucide-react";
 import React, { HTMLAttributes, useId } from "react";
-import { BentoCard, BentoGrid } from "./bentoGrid";
+import { BentoCard, BentoGrid } from "./BentoGrid";
 import { Globe } from "./Globe";
 import Image from "next/image";
 import Grid from "@/public/grid.svg";
