@@ -1,12 +1,21 @@
 import Hero from "@/components/Hero/Hero";
 import React from "react";
+import dynamic from "next/dynamic";
 import { NavBarSizeable } from "@/components/NavBarSizeable/NavBarSizeable";
-
-import Footer from "@/components/Footer/Footer";
-import Story from "@/components/Story/Story";
-import Projects from "@/components/Projects/Projects";
-import ContactSection from "@/components/Contact/Contact";
 import { FadeUp } from "@/components/ui/FadeUp";
+
+const Story = dynamic(() => import("@/components/Story/Story"), {
+  loading: () => <div className="min-h-[40rem]" />,
+});
+const Projects = dynamic(() => import("@/components/Projects/Projects"), {
+  loading: () => <div className="min-h-[40rem]" />,
+});
+const ContactSection = dynamic(() => import("@/components/Contact/Contact"), {
+  loading: () => <div className="min-h-[30rem]" />,
+});
+const Footer = dynamic(() => import("@/components/Footer/Footer"), {
+  loading: () => <div className="min-h-[20rem]" />,
+});
 
 export default function Home() {
   return (

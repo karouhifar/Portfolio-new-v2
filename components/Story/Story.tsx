@@ -1,23 +1,58 @@
 "use client";
 import React, { useId, useMemo, useState } from "react";
-import SVGCard from "../ui/SVGCard";
+import dynamic from "next/dynamic";
 import { FadeUp } from "../ui/FadeUp";
-import { IconCloud } from "../ui/IconCloud";
 import Medium from "@/public/Medium.svg";
 import Icon from "@/public/Icon.svg";
 import { CpuIcon } from "lucide-react";
-import { BackgroundGradientAnimation } from "../ui/GradientBackground";
 import MagicButton from "../ui/MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import Grid from "@/public/grid.svg";
-import { AnimatedSpan, Terminal, TypingAnimation } from "../ui/Terminal";
 import { InViewMount } from "../ui/InViewMount";
 import { AnimatedList } from "../ui/AnimatedItemList";
 import Notification, { notifications } from "../Notification/Noification";
-import CanadaDottedMap from "../ui/CanadaDottedMap";
+
+const SVGCard = dynamic(() => import("../ui/SVGCard"), {
+  ssr: false,
+  loading: () => <div className="h-full min-h-[12rem] rounded-3xl bg-[#1D1D3B]" />,
+});
+const IconCloud = dynamic(
+  () => import("../ui/IconCloud").then((m) => m.IconCloud),
+  {
+    ssr: false,
+    loading: () => <div className="h-80 w-full" />,
+  }
+);
+const BackgroundGradientAnimation = dynamic(
+  () =>
+    import("../ui/GradientBackground").then(
+      (m) => m.BackgroundGradientAnimation
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-full min-h-[12rem] rounded-3xl bg-[#1D1D3B]" />
+    ),
+  }
+);
+const Terminal = dynamic(
+  () => import("../ui/Terminal").then((m) => m.Terminal),
+  { ssr: false }
+);
+const TypingAnimation = dynamic(
+  () => import("../ui/Terminal").then((m) => m.TypingAnimation),
+  { ssr: false }
+);
+const AnimatedSpan = dynamic(
+  () => import("../ui/Terminal").then((m) => m.AnimatedSpan),
+  { ssr: false }
+);
+const CanadaDottedMap = dynamic(() => import("../ui/CanadaDottedMap"), {
+  ssr: false,
+});
 
 const slugs = [
   "databricks",

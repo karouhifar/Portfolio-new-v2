@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CpuIcon, MapPin } from "lucide-react";
 import React, { HTMLAttributes, useId } from "react";
-import { BentoCard, BentoGrid } from "./BentoGrid";
+import { BentoCard, BentoGrid } from "./bentoGrid";
 import { Globe } from "./Globe";
 import Image from "next/image";
 import Grid from "@/public/grid.svg";
@@ -118,7 +118,7 @@ const SHAPES = {
               alt="Contact Illustration"
               className={cn(
                 "absolute right-0 bottom-0 w-full h-full",
-                "object-cover object-center"
+                "object-cover object-center",
               )}
               priority
             />
