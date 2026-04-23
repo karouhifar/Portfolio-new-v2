@@ -58,7 +58,7 @@ const fadeUp: Variants = {
 
 function formReducer(
   state: FormState,
-  action: { field: keyof FormState; value: string }
+  action: { field: keyof FormState; value: string },
 ): FormState {
   return {
     ...state,
@@ -68,7 +68,7 @@ function formReducer(
 
 export default function ContactSection({}: { email?: string }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">(
-    "idle"
+    "idle",
   );
 
   const [state, dispatch] = useReducer(formReducer, initialState);
@@ -96,7 +96,7 @@ export default function ContactSection({}: { email?: string }) {
       });
 
       throw new Error(
-        errorBody?.error || `Request failed with status ${res.status}`
+        errorBody?.error || `Request failed with status ${res.status}`,
       );
     }
     const data = await res.json();
@@ -174,7 +174,7 @@ export default function ContactSection({}: { email?: string }) {
 
   return (
     <section
-      className="relative mx-auto w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
+      className="relative mx-auto w-full px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8 lg:pb-24"
       id="contact"
     >
       {/* Background: deep navy + grid + soft glow */}

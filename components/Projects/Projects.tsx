@@ -6,7 +6,7 @@ import placeholderBG from "@/public/images/bg.png";
 import Image from "next/image";
 const Projects = () => {
   return (
-    <section className="w-full md:py-20 lg:py-24">
+    <section className="w-full ">
       <div
         className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8"
         id="projects"

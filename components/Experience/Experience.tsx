@@ -1,7 +1,7 @@
 // app/page.tsx  (or anywhere — it's a self-contained client component)
 "use client";
 
-import { useEffect, useId, useState, type ChangeEvent } from "react";
+import { useEffect, useId, useRef, useState, type ChangeEvent } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -35,6 +35,7 @@ import { cn } from "@/lib/utils";
 import { FadeUp } from "../ui/FadeUp";
 import { AnimatedSpan, Terminal, TypingAnimation } from "../ui/Terminal";
 import Icon from "@/public/Icon.svg";
+import Pin from "@/public/pin.svg";
 import Medium from "@/public/Medium.svg";
 import Grid from "@/public/grid.svg";
 import React from "react";
@@ -130,131 +131,6 @@ function Waveform({
   );
 }
 
-function Vinyl({
-  playing,
-  setPlaying,
-  progress,
-}: {
-  playing: boolean;
-  setPlaying: (v: boolean) => void;
-  progress: number;
-}) {
-  const r = 122;
-  const circumference = 2 * Math.PI * r;
-
-  // Continuous rotation via motion value — pauses in place when `playing` is false
-  const rotate = useMotionValue(0);
-  useAnimationFrame((_, delta) => {
-    if (playing) rotate.set(rotate.get() + delta * 0.02); // ≈ 1 rev / 18s
-  });
-
-  return (
-    <div className="relative h-[260px] w-[260px]">
-      {/* progress ring */}
-      <svg width={260} height={260} className="absolute inset-0 -rotate-90">
-        <circle
-          cx={130}
-          cy={130}
-          r={r}
-          fill="none"
-          stroke="#2A2850"
-          strokeWidth={1.5}
-        />
-        <motion.circle
-          cx={130}
-          cy={130}
-          r={r}
-          fill="none"
-          stroke="#E8B460"
-          strokeWidth={2.5}
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          animate={{ strokeDashoffset: circumference * (1 - progress / 100) }}
-          transition={{ duration: 0.3, ease: "linear" }}
-          style={{ filter: "drop-shadow(0 0 4px rgba(232,180,96,0.4))" }}
-        />
-      </svg>
-
-      {/* record */}
-      <div
-        className="absolute inset-[18px] overflow-hidden rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle at 35% 35%, #2A2758 0%, #0A0826 55%, #05041A 100%)",
-          boxShadow:
-            "inset 0 0 24px rgba(0,0,0,0.9), 0 6px 24px rgba(0,0,0,0.5)",
-        }}
-      >
-        <motion.div
-          className="absolute inset-0 rounded-full"
-          style={{ rotate }}
-        >
-          {/* grooves */}
-          {Array.from({ length: 14 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full border"
-              style={{
-                inset: `${5 + i * 6}px`,
-                borderColor: "rgba(232,180,96,0.045)",
-              }}
-            />
-          ))}
-          {/* glimmer sweep */}
-          <div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background:
-                "conic-gradient(from 45deg, transparent 0deg, rgba(232,180,96,0.08) 30deg, transparent 60deg, transparent 360deg)",
-            }}
-          />
-          {/* center label */}
-          <div
-            className="absolute left-1/2 top-1/2 flex h-[92px] w-[92px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full"
-            style={{
-              background: "linear-gradient(135deg, #E8B460 0%, #D97757 100%)",
-              boxShadow: "inset 0 0 12px rgba(0,0,0,0.25)",
-            }}
-          >
-            <span
-              className={cn(
-                fraunces.className,
-                "text-[14px] font-bold italic leading-none text-[#05041A]",
-              )}
-            >
-              Side A
-            </span>
-            <span className="mt-1 text-[7px] font-medium tracking-[0.2em] text-[#05041A] opacity-85">
-              VOL · 07
-            </span>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* play button (static, above spinning record) */}
-      <motion.button
-        onClick={() => setPlaying(!playing)}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute left-1/2 top-1/2 z-10 flex h-[58px] w-[58px] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full"
-        style={{
-          background: "#E8B460",
-          color: "#05041A",
-          boxShadow:
-            "0 10px 30px rgba(232,180,96,0.35), inset 0 0 0 1px rgba(255,255,255,0.15)",
-        }}
-        aria-label={playing ? "Pause" : "Play"}
-      >
-        {playing ? (
-          <Pause size={22} fill="#05041A" />
-        ) : (
-          <Play size={22} fill="#05041A" className="ml-[3px]" />
-        )}
-      </motion.button>
-    </div>
-  );
-}
-
 /* ─────────── page ─────────── */
 
 export default function Experience() {
@@ -264,6 +140,13 @@ export default function Experience() {
   const [time, setTime] = useState<Date>(new Date());
   const [vol, setVol] = useState<number>(72);
   const [mounted, setMounted] = useState<boolean>(false);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (v) v.playbackRate = 1.5;
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -378,33 +261,6 @@ export default function Experience() {
   const iconBtn =
     "flex h-9 w-9 items-center justify-center rounded-full border border-[#2A2850] bg-[#1E1C44] text-[#F0EDE3] transition-colors hover:bg-[#2A2850]";
 
-  // content of the central circle (reused desktop + mobile)
-  const CircleContent = (
-    <div className="relative flex items-center justify-center">
-      <Vinyl playing={playing} setPlaying={setPlaying} progress={progress} />
-      <motion.button
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setProgress(Math.max(0, progress - 10))}
-        className={cn(iconBtn, "absolute left-[-8px] top-1/2 -translate-y-1/2")}
-        aria-label="Rewind 10%"
-      >
-        <SkipBack size={13} fill="currentColor" />
-      </motion.button>
-      <motion.button
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setProgress(Math.min(100, progress + 10))}
-        className={cn(
-          iconBtn,
-          "absolute right-[-8px] top-1/2 -translate-y-1/2",
-        )}
-        aria-label="Forward 10%"
-      >
-        <SkipForward size={13} fill="currentColor" />
-      </motion.button>
-    </div>
-  );
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   return (
@@ -416,19 +272,6 @@ export default function Experience() {
         "min-h-screen p-[14px] text-[#F0EDE3] antialiased",
       )}
     >
-      {/* Mobile-only circle (pulled into layout flow) */}
-      <div className="mb-2.5 flex justify-center md:hidden">
-        <div
-          className="relative flex h-[240px] w-[240px] items-center justify-center overflow-hidden rounded-full border"
-          style={{
-            background: "#141434",
-            borderColor: "rgba(232,180,96,0.08)",
-          }}
-        >
-          {CircleContent}
-        </div>
-      </div>
-
       <div className="grid min-h-[calc(100vh-70px)] gap-2.5 md:grid-rows-[5fr_6fr]">
         {/* ───── TOP ROW ───── */}
         <div className="grid grid-cols-1 gap-2.5 md:grid-cols-[1fr_1fr_2fr]">
@@ -600,17 +443,28 @@ export default function Experience() {
           {/* Circle "cutout" overlay (desktop only) — creates the 4-card curved corners */}
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-[-5px] z-[6] hidden h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full md:block"
-            style={{ background: "#05041A" }}
+            className="pointer-events-none absolute left-1/2 top-[-5px] z-[6] hidden h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full md:block"
+            style={{ background: "radial-gradient(circle, #04041b, #05041A)" }}
           />
-          <div
-            className="absolute left-1/2 top-[-5px] z-[7] hidden h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border md:flex"
-            style={{
-              background: "#141434",
-              borderColor: "rgba(232,180,96,0.08)",
-            }}
-          >
-            {CircleContent}
+          <div className="absolute left-1/2 top-[-5px] z-[7] hidden h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full md:flex">
+            <div className="relative flex h-full w-full items-center justify-center">
+              <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-[108px] scale-135 object-cover"
+              >
+                <source
+                  src={
+                    "https://d32bczqlkgra6r.cloudfront.net/videos/diamond.mp4"
+                  }
+                  type="video/mp4"
+                />
+              </video>
+            </div>
           </div>
 
           {/* BL — Activity */}
@@ -620,7 +474,7 @@ export default function Experience() {
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className={cn(card, "gap-[14px]")}
+            className={cn(card, "gap-[14px] mr-2")}
           >
             <FadeUp number={4}>
               <div className="flex items-start justify-between">
@@ -646,14 +500,38 @@ export default function Experience() {
               </div>
             </FadeUp>
           </motion.div>
+          <div
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute left-1/2 top-1/2 z-[13]",
+              "h-[255px] w-[100px] -translate-x-1/2 -translate-y-1/2",
+              "hidden md:block",
+            )}
+          >
+            <Image
+              src={Pin}
+              alt=""
+              aria-hidden
+              className="h-full w-full absolute left-1/2 top-4/6 -translate-x-1/2 -translate-y-1/2 "
+              priority
+            />
 
+            {/* Top circle cutout — SVG cy=31 */}
+            <div className="absolute -z-1 left-1/2 top-[100px] h-[52px] w-[52px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#05041A]" />
+
+            {/* Middle bar cutout — SVG spans y=64..92, center y=78 */}
+            <div className="absolute -z-1 left-1/2 top-[165px] h-[55px] w-[35px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#05041A]" />
+
+            {/* Bottom circle cutout — SVG cy=123 */}
+            <div className="absolute -z-1 left-1/2 top-[240px] h-[35px] w-[35px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#05041A]" />
+          </div>
           {/* BR — Stats */}
           <motion.div
             custom={4}
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className={cn(card, "gap-[14px]")}
+            className={cn(card, "gap-[14px] ml-2")}
           >
             <div className="flex items-start justify-end mr-15">
               <div>
