@@ -4,9 +4,10 @@ import dynamic from "next/dynamic";
 import { NavBarSizeable } from "@/components/NavBarSizeable/NavBarSizeable";
 import { FadeUp } from "@/components/ui/FadeUp";
 
-const Story = dynamic(() => import("@/components/Story/Story"), {
+const Experience = dynamic(() => import("@/components/Experience/Experience"), {
   loading: () => <div className="min-h-[40rem]" />,
 });
+
 const Projects = dynamic(() => import("@/components/Projects/Projects"), {
   loading: () => <div className="min-h-[40rem]" />,
 });
@@ -26,7 +27,7 @@ export default function Home() {
             <Hero />
           </FadeUp>
           <FadeUp amount={0.45}>
-            <Story />
+            <Experience />
           </FadeUp>
           <FadeUp amount={0.15}>
             <Projects />

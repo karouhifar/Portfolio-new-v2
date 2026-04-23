@@ -27,7 +27,7 @@ type FadeUpProps = {
 
 export const FadeUp: React.FC<FadeUpProps> = ({
   children,
-  number = 1,
+  number = 0,
   amount = "some",
   className,
 }) => {

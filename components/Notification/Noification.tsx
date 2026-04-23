@@ -30,7 +30,7 @@ export const notifications = [
   {
     name: "CIBC",
     description: "Senior Application Developer",
-    date: "Sep 2025 - Present",
+    date: "Sep 2023 - Present",
     image: logo_3,
     color: "#FFFFFF",
   },
@@ -45,7 +45,7 @@ const Notification = ({ name, description, image, color, date }: Item) => {
         // light styles
         "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
         // dark styles
-        "transform-gpu dark:bg-transparent dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:backdrop-blur-md dark:[border:1px_solid_rgba(255,255,255,.1)]"
+        "transform-gpu dark:bg-transparent dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:backdrop-blur-md dark:[border:1px_solid_rgba(255,255,255,.1)]",
       )}
     >
       <div className="flex flex-row items-center gap-3">
