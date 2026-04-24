@@ -43,6 +43,8 @@ const initialState: FormState = {
   message: "",
 };
 
+const EMAIL_API = process.env.NEXT_PUBLIC_API_URL;
+
 const fieldBase =
   "w-full px-4 py-3 bg-indigo-900/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400/50 transition-colors";
 const labelBase = "block mb-2 text-sm font-medium text-gray-900 text-white";
@@ -55,8 +57,6 @@ const fadeUp: Variants = {
     transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
   },
 };
-
-const EMAIL_API = process.env.NEXT_EMAIL_API_URL;
 
 function formReducer(
   state: FormState,
@@ -77,7 +77,7 @@ export default function ContactSection({}: { email?: string }) {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
-
+    console.log("Submitting form with data:", EMAIL_API);
     const res = await fetch(EMAIL_API as string, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
