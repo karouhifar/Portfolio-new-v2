@@ -56,6 +56,8 @@ const fadeUp: Variants = {
   },
 };
 
+const EMAIL_API = process.env.NEXT_EMAIL_API_URL;
+
 function formReducer(
   state: FormState,
   action: { field: keyof FormState; value: string },
@@ -76,14 +78,14 @@ export default function ContactSection({}: { email?: string }) {
     e.preventDefault();
     setStatus("submitting");
 
-    const res = await fetch("/api/send", {
+    const res = await fetch(EMAIL_API as string, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         toEmail: state.toEmail,
         firstName: state.firstName,
         subject: state.subject,
-        message: state.message,
+        message: `${"DreamsDigital Inc."}\n\nMessage Details:\n${state.message}`,
       }),
     });
     if (!res.ok) {
