@@ -1,7 +1,15 @@
 // app/page.tsx  (or anywhere — it's a self-contained client component)
 "use client";
 
-import { useEffect, useId, useRef, useState, type ChangeEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+} from "react";
 import Image from "next/image";
 import {
   motion,
@@ -41,6 +49,7 @@ import Grid from "@/public/grid.svg";
 import React from "react";
 import { InViewMount } from "../ui/InViewMount";
 import { AnimatedList } from "../ui/AnimatedItemList";
+import { TextSpinner } from "../ui/TextSpinner";
 import { Globe } from "../ui/Globe";
 import Notification, { notifications } from "../Notification/Noification";
 import CanadaDottedMap from "../ui/CanadaDottedMap";
@@ -160,6 +169,20 @@ export default function Experience() {
     return () => clearInterval(id);
   }, [playing]);
 
+  const v1 = useMemo(() => {
+    const chunkCount = 10; // how many groups you want
+
+    const chunks = Array.from({ length: chunkCount }, () => {
+      const chunkLength = Math.floor(Math.random() * 5) + 2; // length 2–6
+      return Array.from(
+        { length: chunkLength },
+        () => (Math.random() * 2) | 0,
+      ).join("");
+    });
+
+    return chunks.join(" ");
+  }, []);
+
   const pad = (n: number) => String(n).padStart(2, "0");
   const totalSec = 243; // 4:03
   const elapsed = Math.floor((progress / 100) * totalSec);
@@ -251,7 +274,7 @@ export default function Experience() {
 
   // shared class strings — used more than once
   const card =
-    "relative flex flex-col overflow-hidden rounded-[28px] border border-[rgba(232,180,96,0.04)] bg-[#141434] p-[22px]";
+    "relative flex flex-col overflow-hidden rounded-[28px] border border-[rgba(232,180,96,0.04)] bg-[#141632] p-[22px]";
   const label =
     "font-sans text-base sm:text-lg lg:text-2xl font-bold text-white";
   const divider =
@@ -272,7 +295,7 @@ export default function Experience() {
         "min-h-screen p-[14px] text-[#F0EDE3] antialiased",
       )}
     >
-      <div className="grid min-h-[calc(100vh-70px)] gap-2.5 md:grid-rows-[5fr_6fr]">
+      <div className="grid min-h-[calc(100vh-70px)] gap-y-3.5 md:grid-rows-[5fr_6fr] space- space-y-3">
         {/* ───── TOP ROW ───── */}
         <div className="grid grid-cols-1 gap-2.5 md:grid-cols-[1fr_1fr_2fr]">
           {/* TL — In Session */}
@@ -327,7 +350,7 @@ export default function Experience() {
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className={cn(card, "gap-2.5", "relative")}
+            className={cn(card, "gap-2.5", "relative", "mr-3")}
           >
             <FadeUp number={2} className="relative">
               <div className="space-y-3">
@@ -385,7 +408,7 @@ export default function Experience() {
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className={cn(card, "gap-2.5")}
+            className={cn(card, "gap-2.5", "ml-3")}
           >
             <div className="w-full h-full absolute left-0 top-0 overflow-hidden">
               <Image
@@ -446,6 +469,18 @@ export default function Experience() {
             className="pointer-events-none absolute left-1/2 top-[-5px] z-[6] hidden h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full md:block"
             style={{ background: "radial-gradient(circle, #04041b, #05041A)" }}
           />
+
+          <div
+            aria-hidden
+            className="absolute left-1/2 -top-2 z-50 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 pointer-events-none mask-l-from-70% mask-l-to-86% mask-r-from-70% mask-r-to-86% hidden md:flex"
+          >
+            <TextSpinner
+              className="font-press text-xs tracking-[0.35em] h-full w-full text-[#ACA0E4]"
+              radius={11.5}
+            >
+              {v1}
+            </TextSpinner>
+          </div>
           <div className="absolute left-1/2 top-[-5px] z-[7] hidden h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full md:flex">
             <div className="relative flex h-full w-full items-center justify-center">
               <video
@@ -531,7 +566,7 @@ export default function Experience() {
             initial="hidden"
             animate="visible"
             variants={cardVariants}
-            className={cn(card, "gap-[14px] ml-2")}
+            className={cn(card, "gap-[14px] ml-2 ")}
           >
             <div className="flex items-start justify-end mr-15">
               <div>
