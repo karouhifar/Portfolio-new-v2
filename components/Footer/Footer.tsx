@@ -52,8 +52,8 @@ export default function Footer() {
         <Image
           src={logo}
           alt="Kamyab Rouhifar"
-          width={180}
-          height={40}
+          width={80}
+          height={10}
           className=" mb-8"
         />
         <h2 className="mb-4 text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
