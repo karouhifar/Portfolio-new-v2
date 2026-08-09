@@ -3,8 +3,14 @@
 
 import { useEffect, useState } from "react";
 
-export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false); // avoid SSR hydration mismatch
+/**
+ * Returns `undefined` until the query has been evaluated in the browser.
+ * Server and first client render therefore agree (no hydration mismatch), and
+ * callers can choose to render nothing rather than committing to the wrong
+ * branch and swapping a heavy component in a moment later.
+ */
+export function useMediaQuery(query: string): boolean | undefined {
+  const [matches, setMatches] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

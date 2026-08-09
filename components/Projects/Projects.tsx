@@ -4,40 +4,46 @@ import { FaLocationArrow } from "react-icons/fa6";
 import { MagicCard } from "../ui/MagicCard";
 import placeholderBG from "@/public/images/bg.png";
 import Image from "next/image";
+
 const Projects = () => {
   return (
-    <section className="w-full ">
-      <div
-        className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8"
-        id="projects"
-      >
-        <h2 className="text-balance text-center text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
+    <section
+      id="projects"
+      aria-labelledby="projects-heading"
+      className="w-full"
+    >
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+        <h2
+          id="projects-heading"
+          className="text-balance text-center text-2xl font-semibold text-white sm:text-4xl lg:text-5xl"
+        >
           A small selection of{" "}
           <span className="text-purple">recent projects</span>
         </h2>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-12 lg:grid-cols-2 lg:gap-10">
           {projects.map((item) => (
             <MagicCard
               key={item.id}
-              containerClassName="col-span-1 h-full min-h-[26rem] bg-background"
-              className="px-6 py-10 sm:px-8 sm:py-12"
+              containerClassName="col-span-1 h-full min-h-[24rem] sm:min-h-[26rem] bg-background"
+              className="px-4 py-8 sm:px-8 sm:py-12"
             >
-              <div className="relative mb-8 flex h-52 w-full items-center justify-center overflow-hidden rounded-3xl bg-[#13162D] sm:h-60 lg:h-72">
-                <div className="absolute inset-0">
-                  <Image
-                    src={placeholderBG}
-                    alt="Project background texture"
-                    className="h-full w-full object-cover opacity-90"
-                    priority
-                  />
-                </div>
+              <div className="relative mb-8 flex h-44 w-full items-center justify-center overflow-hidden rounded-3xl bg-[#13162D] sm:h-60 lg:h-72">
+                <Image
+                  src={placeholderBG}
+                  alt=""
+                  aria-hidden
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover opacity-90"
+                />
                 <Image
                   src={item.image}
-                  alt={`Project ${item.id} showcase`}
+                  alt={`${item.title} project screenshot`}
                   width={420}
                   height={320}
-                  className="relative z-10 w-4/5 max-w-sm rounded-2xl object-cover shadow-xl sm:w-3/4"
+                  sizes="(max-width: 640px) 80vw, (max-width: 1024px) 60vw, 30vw"
+                  className="relative z-10 h-auto w-4/5 max-w-sm rounded-2xl object-cover shadow-xl sm:w-3/4"
                 />
               </div>
 
@@ -49,10 +55,10 @@ const Projects = () => {
               </p>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center">
-                  {item.technologies.map(({ url }, index) => (
-                    <div
-                      key={index + ""}
+                <ul className="flex items-center" aria-label="Technologies used">
+                  {item.technologies.map(({ url, title }, index) => (
+                    <li
+                      key={title}
                       className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-white/20 bg-black sm:h-9 sm:w-9 lg:h-10 lg:w-10"
                       style={{
                         transform: `translateX(-${5 * index + 2}px)`,
@@ -61,20 +67,25 @@ const Projects = () => {
                       <Image
                         src={url}
                         fill
-                        alt={`technology-${index}`}
+                        sizes="40px"
+                        alt={title}
                         className="p-2"
                       />
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
 
                 <a
                   href={item.link}
-                  target="__blank"
-                  className="flex items-center gap-3 text-sm font-medium text-purple md:text-base lg:text-lg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-md text-sm font-medium text-purple md:text-base lg:text-lg"
                 >
-                  <span className="text-white">Check Live Site</span>
-                  <FaLocationArrow className="text-white" />
+                  <span className="text-white">
+                    Check Live Site
+                    <span className="sr-only"> — {item.title}</span>
+                  </span>
+                  <FaLocationArrow className="text-white" aria-hidden />
                 </a>
               </div>
             </MagicCard>

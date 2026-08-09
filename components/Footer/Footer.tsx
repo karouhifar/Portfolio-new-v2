@@ -7,6 +7,7 @@ import type { IconType } from "react-icons";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import ScheduleButton from "../ui/ScheduleButton";
+import { siteConfig } from "@/lib/site";
 
 type Social = {
   href: string;
@@ -15,18 +16,10 @@ type Social = {
 };
 
 const SOCIALS: Social[] = [
-  {
-    href: "https://medium.com/@karouhifar",
-    label: "Medium",
-    Icon: FaMedium,
-  },
-  { href: "https://x.com/KRouhifar", label: "X (Twitter)", Icon: FaXTwitter },
-  { href: "https://github.com/karouhifar", label: "GitHub", Icon: FaGithub },
-  {
-    href: "https://www.linkedin.com/in/kamyab-rouhifar/",
-    label: "LinkedIn",
-    Icon: FaLinkedin,
-  },
+  { href: siteConfig.socials.medium, label: "Medium", Icon: FaMedium },
+  { href: siteConfig.socials.x, label: "X (Twitter)", Icon: FaXTwitter },
+  { href: siteConfig.socials.github, label: "GitHub", Icon: FaGithub },
+  { href: siteConfig.socials.linkedin, label: "LinkedIn", Icon: FaLinkedin },
 ];
 
 export default function Footer() {
@@ -48,15 +41,15 @@ export default function Footer() {
         }}
       />
 
-      <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-20 text-center sm:px-6 md:py-10">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-4 py-16 text-center sm:px-6 sm:py-20 md:py-10">
         <Image
           src={logo}
-          alt="Kamyab Rouhifar"
-          width={80}
-          height={10}
-          className=" mb-8"
+          alt="Kamyab Rouhifar logo"
+          width={72}
+          height={66}
+          className="mb-8 h-auto w-[72px]"
         />
-        <h2 className="mb-4 text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
+        <h2 className="mb-4 text-2xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl">
           Ready to take{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-purple-300 to-violet-400 bg-clip-text text-transparent">
             your
@@ -68,11 +61,14 @@ export default function Footer() {
         <p className="mb-10 max-w-2xl text-balance text-white/70">
           Reach out and let’s chat about how I can help you hit your goals.
         </p>
-        <ScheduleButton url="https://calendly.com/karouhifar/interviewing-with-kamyab">
-          <div className="group flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-6 py-3 text-white/90 shadow-lg backdrop-blur transition hover:bg-white/15">
+        <ScheduleButton url={siteConfig.calendly} label="Contact Me Now">
+          <span className="group inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-6 py-3 text-white/90 shadow-lg backdrop-blur transition hover:bg-white/15">
             Contact Me Now
-            <HiPhoneArrowUpRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </div>
+            <HiPhoneArrowUpRight
+              aria-hidden
+              className="h-5 w-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </span>
         </ScheduleButton>
       </div>
 
@@ -83,29 +79,31 @@ export default function Footer() {
           <span className="text-white/80">
             Powered by{" "}
             <a
-              className="text-blue-500"
-              href="https://dreamsDigital.ca"
-              target="__blank"
+              className="rounded text-blue-500"
+              href="https://dreamsdigital.ca"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               DreamsDigital.ca
             </a>
           </span>
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <ul className="flex flex-wrap items-center justify-center gap-3">
           {SOCIALS.map(({ href, label, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              className="rounded-xl border border-white/10 bg-white/5 p-3 text-white/80 shadow-sm backdrop-blur transition hover:bg-white/10 hover:text-white"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Icon className="h-4 w-4" />
-            </a>
+            <li key={label}>
+              <a
+                href={href}
+                aria-label={label}
+                className="block rounded-xl border border-white/10 bg-white/5 p-3 text-white/80 shadow-sm backdrop-blur transition hover:bg-white/10 hover:text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon className="h-4 w-4" aria-hidden />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       {/* Soft vignette at the very bottom */}

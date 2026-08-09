@@ -5,30 +5,24 @@ import {
   NavItems,
   MobileNav,
   NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
+  navbarButtonStyles,
 } from "@/components/ui/Navbar";
 import { useState } from "react";
 import ScheduleButton from "../ui/ScheduleButton";
+import { siteConfig } from "@/lib/site";
+
+const navItems = [
+  { name: "Story", link: "#story" },
+  { name: "Projects", link: "#projects" },
+  { name: "Contact", link: "#contact" },
+];
+
+const MOBILE_MENU_ID = "mobile-nav-menu";
 
 export function NavBarSizeable({ children }: { children: React.ReactNode }) {
-  const navItems = [
-    {
-      name: "Story",
-      link: "#story",
-    },
-    {
-      name: "Projects",
-      link: "#projects",
-    },
-    {
-      name: "Contact",
-      link: "#contact",
-    },
-  ];
-
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -39,9 +33,10 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
           <NavbarLogo />
           <NavItems items={navItems} className="max-w-md" />
           <div className="hidden items-center gap-3 lg:flex">
-            <NavbarButton variant="primary">
-              <ScheduleButton url="https://calendly.com/karouhifar/interviewing-with-kamyab" />
-            </NavbarButton>
+            <ScheduleButton
+              url={siteConfig.calendly}
+              className={navbarButtonStyles("primary")}
+            />
           </div>
         </NavBody>
 
@@ -51,48 +46,40 @@ export function NavBarSizeable({ children }: { children: React.ReactNode }) {
             <NavbarLogo />
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              controls={MOBILE_MENU_ID}
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
             />
           </MobileNavHeader>
 
           <MobileNavMenu
+            id={MOBILE_MENU_ID}
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) => (
+            {navItems.map((item) => (
               <a
-                key={`mobile-link-${idx}`}
+                key={item.link}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                className="w-full rounded-md py-1 text-neutral-600 dark:text-neutral-300"
               >
                 <span className="block">{item.name}</span>
               </a>
             ))}
             <div className="flex w-full flex-col gap-3 pt-2">
-              <NavbarButton
+              <ScheduleButton
+                url={siteConfig.calendly}
+                className={navbarButtonStyles("primary", "w-full")}
                 onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Login
-              </NavbarButton>
-              <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
-              >
-                Book a call
-              </NavbarButton>
+              />
             </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-      <main className="mx-auto flex w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 ">
+
+      <main className="mx-auto flex w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
         {children}
       </main>
-
-      {/* Navbar */}
     </div>
   );
 }

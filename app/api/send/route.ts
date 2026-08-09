@@ -1,7 +1,9 @@
-import { EmailTemplate } from "@/components/Email/EmailTemplate";
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 
+// Email delivery via Resend is currently disabled; see the commented block in
+// POST below for the wiring (needs RESEND_API_KEY + a verified FROM_EMAIL).
+// import { EmailTemplate } from "@/components/Email/EmailTemplate";
+// import { Resend } from "resend";
 // const resend = new Resend(process.env.RESEND_API_KEY);
 
 // This will be called when you GET /api/send
@@ -15,8 +17,9 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     // (optional) read data from request body, e.g. contact form submission
-    const body = await req.json();
-    const { toEmail, firstName, message, subject } = body;
+    await req.json();
+
+    // const { toEmail, firstName, message, subject } = body;
     // const { data, error } = await resend.emails.send({
     //   from: `Kamyab Rouhifar <${process.env.FROM_EMAIL as string}>`, // MUST be a verified sender/domain
     //   to: [toEmail], // test inbox Resend provides

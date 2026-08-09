@@ -1,51 +1,58 @@
+"use client";
+
 import DottedMap from "dotted-map";
 import { useMemo } from "react";
 
 export default function CanadaDottedMap() {
-  // ISO-3 country code for Canada is 'CAN'
-  const map = new DottedMap({
-    height: 80, // tweak dot density
-    countries: ["CAN"], // restrict to Canada
-    grid: "diagonal", // looks nice with circles/hex
-  });
-  const torontoPoint = map.addPin({
-    lat: 43.6532,
-    lng: -79.3832,
-  });
+  // Building the map rasterises the country outline — do it once, not on every
+  // parent re-render.
+  const { src, coordinate } = useMemo(() => {
+    // ISO-3 country code for Canada is 'CAN'
+    const map = new DottedMap({
+      height: 80, // tweak dot density
+      countries: ["CAN"], // restrict to Canada
+      grid: "diagonal", // looks nice with circles/hex
+    });
 
-  const svg = map.getSVG({
-    radius: 0.22, // base dot size
-    color: "#94a3b8", // default dot color
-    shape: "circle", // "circle" | "hexagon"
-    backgroundColor: "transparent",
-  });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const coordinate = useMemo(() => {
-    const svgW = map.image.width;
-    const svgH = map.image.height;
-    const topPercent = (torontoPoint.y / svgH + 0.09) * 100;
-    const leftPercent = (torontoPoint.x / svgW) * 100;
-    return { topPercent, leftPercent };
-  }, [map.image.width, map.image.height]);
+    const torontoPoint = map.addPin({ lat: 43.6532, lng: -79.3832 });
+
+    const svg = map.getSVG({
+      radius: 0.22, // base dot size
+      color: "#94a3b8", // default dot color
+      shape: "circle", // "circle" | "hexagon"
+      backgroundColor: "transparent",
+    });
+
+    return {
+      src: `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`,
+      coordinate: {
+        topPercent: (torontoPoint.y / map.image.height + 0.09) * 100,
+        leftPercent: (torontoPoint.x / map.image.width) * 100,
+      },
+    };
+  }, []);
 
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block w-full">
+      {/* Inline SVG data URI — next/image cannot optimise it, so a plain <img>
+          is correct here. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`}
-        alt="Dotted map of Canada with city markers"
-        className="w-full h-auto"
+        src={src}
+        alt="Dotted map of Canada marking Toronto"
+        className="h-auto w-full"
       />
       <div
         className="absolute -translate-x-1/2 -translate-y-full"
         style={{
-          top: `${coordinate.topPercent}%`, // ⬅ adjust to line up with your red pin
-          left: `${coordinate.leftPercent}%`, // ⬅ adjust to line up with your red pin
+          top: `${coordinate.topPercent}%`,
+          left: `${coordinate.leftPercent}%`,
         }}
       >
         {/* little red dot + label */}
         <div className="flex flex-col items-center gap-2">
-          <span className="block w-2 h-2 rounded-full bg-red-500 border border-white shadow" />
-          <span className="text-[10px] leading-none px-2 py-1 rounded-3xl bg-white text-black shadow-md ring-1 ring-white/20">
+          <span className="block h-2 w-2 rounded-full border border-white bg-red-500 shadow" />
+          <span className="rounded-3xl bg-white px-2 py-1 text-[10px] leading-none text-black shadow-md ring-1 ring-white/20">
             Toronto
           </span>
         </div>

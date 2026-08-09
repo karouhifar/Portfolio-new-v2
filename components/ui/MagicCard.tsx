@@ -72,13 +72,22 @@ export const MagicCard = ({
   );
 };
 
+// Inlined SVG turbulence. The previous `url(/noise.webp)` asset does not exist
+// in /public, so every card fired a 404 and rendered no texture at all.
+const NOISE_DATA_URI =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="120" height="120" filter="url(#n)" opacity="0.5"/></svg>`,
+  );
+
 const Noise = () => {
   return (
     <div
-      className="absolute inset-0 w-full h-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)] -z-40"
+      aria-hidden
+      className="pointer-events-none absolute inset-0 -z-40 h-full w-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]"
       style={{
-        backgroundImage: "url(/noise.webp)",
-        backgroundSize: "30%",
+        backgroundImage: `url("${NOISE_DATA_URI}")`,
+        backgroundSize: "120px 120px",
       }}
     ></div>
   );

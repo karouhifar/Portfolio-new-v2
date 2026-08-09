@@ -23,6 +23,9 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      // macOS AppleDouble sidecar files created on non-HFS volumes.
+      // They are not source and break the parser.
+      "**/._*",
     ],
   },
 ];

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants } from "motion/react";
 
-const fadeUp: Variants = {
+const withBlur: Variants = {
   initial: { opacity: 0, y: 16, filter: "blur(10px)" },
   animate: (custom: number) => ({
     opacity: 1,
@@ -17,11 +17,30 @@ const fadeUp: Variants = {
   }),
 };
 
+const withoutBlur: Variants = {
+  initial: { opacity: 0, y: 16 },
+  animate: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: custom * 0.1,
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
 type FadeUpProps = {
   children: React.ReactNode;
   /**  for custom delay per item when needed */
   number?: number;
   amount?: "some" | "all" | number;
+  /**
+   * Animating `filter: blur()` forces a full repaint of the subtree each frame.
+   * That is fine for a card, but janky on a full-viewport section — pass
+   * `blur={false}` for those.
+   */
+  blur?: boolean;
   className?: string;
 };
 
@@ -29,6 +48,7 @@ export const FadeUp: React.FC<FadeUpProps> = ({
   children,
   number = 0,
   amount = "some",
+  blur = true,
   className,
 }) => {
   return (
@@ -36,7 +56,7 @@ export const FadeUp: React.FC<FadeUpProps> = ({
       initial="initial"
       whileInView="animate"
       className={className}
-      variants={fadeUp}
+      variants={blur ? withBlur : withoutBlur}
       custom={number}
       viewport={{ once: true, amount }}
     >

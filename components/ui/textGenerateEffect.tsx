@@ -8,14 +8,18 @@ const TextGenerateEffect = ({
   className,
   filter = true,
   duration = 0.5,
+  as: Tag = "div",
 }: {
   words: string;
   className?: string;
   filter?: boolean;
   duration?: number;
+  /** Rendered element — use a heading tag when this is page copy. */
+  as?: "div" | "h1" | "h2" | "h3" | "p";
 }) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
+
   useEffect(() => {
     animate(
       "span",
@@ -26,38 +30,33 @@ const TextGenerateEffect = ({
       {
         duration: duration ? duration : 1,
         delay: stagger(0.2),
-      }
+      },
     );
   }, [animate, filter, duration]);
 
-  const renderWords = () => {
-    return (
-      <motion.div ref={scope}>
-        {wordsArray.map((word, idx) => {
-          return (
-            <motion.span
-              key={word + idx}
-              className="dark:text-white text-black opacity-0"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
-            >
-              {word}{" "}
-            </motion.span>
-          );
-        })}
-      </motion.div>
-    );
-  };
+  const MotionTag = motion[Tag];
 
   return (
-    <div className={cn("font-bold", className)}>
-      <div className="my-4">
-        <div className=" dark:text-white text-black leading-snug tracking-wide">
-          {renderWords()}
-        </div>
-      </div>
-    </div>
+    // Only phrasing content (spans) inside, so this stays valid when `as` is a heading.
+    <MotionTag
+      ref={scope}
+      className={cn(
+        "my-4 font-bold leading-snug tracking-wide text-black dark:text-white",
+        className,
+      )}
+    >
+      {wordsArray.map((word, idx) => (
+        <motion.span
+          key={word + idx}
+          className="opacity-0"
+          style={{
+            filter: filter ? "blur(10px)" : "none",
+          }}
+        >
+          {word}{" "}
+        </motion.span>
+      ))}
+    </MotionTag>
   );
 };
 

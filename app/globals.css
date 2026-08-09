@@ -1,11 +1,29 @@
 @import "tailwindcss";
 
+/*
+ * This portfolio is intentionally dark-only.
+ *
+ * Tailwind's default `dark:` variant resolves to `@media (prefers-color-scheme: dark)`,
+ * which means a visitor whose OS/browser is in light mode would get the *light* half of
+ * every `bg-white dark:bg-neutral-950` / `text-black dark:text-white` pair — white panels
+ * and black-on-black text on a near-black page. Binding the variant to an explicit `.dark`
+ * class (set on <html> in app/layout.tsx) makes the dark branch authoritative regardless of
+ * the OS preference, without touching a single existing `dark:` utility.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  /* Opts the whole document into dark native UI: scrollbars, form controls,
+     autofill backgrounds, date pickers, spinners. */
+  color-scheme: dark;
+
   --background: #04041b;
-  --foreground: #171717;
+  --foreground: #ededed;
   --primary: #06064a;
   --secondary: #1d062e;
   --accent: #fff;
+  --purple: #cbacf9;
+  --border: rgba(255, 255, 255, 0.12);
 }
 
 @theme inline {
@@ -14,6 +32,8 @@
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
   --color-foreground: var(--foreground);
+  --color-purple: var(--purple);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-press: var(--font-press-start);
@@ -31,16 +51,84 @@
   }
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
+html {
+  /* Fixed navbar is ~5rem tall — keep in-page anchors clear of it. */
+  scroll-padding-top: 6rem;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--purple) 35%, transparent);
+  color: #fff;
+}
+
+/* Keep the scrollbar dark even when the browser/OS prefers light. */
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.18);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Chrome/Safari autofill paints an opaque near-white box over dark inputs. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  -webkit-box-shadow: 0 0 0 1000px #171a3a inset;
+  caret-color: var(--foreground);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Visible keyboard focus everywhere, on top of any component-level styling. */
+:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+/*
+ * Respect prefers-reduced-motion. This neutralises CSS animations/transitions;
+ * JS-driven Motion animations are handled by <MotionConfig reducedMotion="user">
+ * in app/layout.tsx.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

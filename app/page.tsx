@@ -23,16 +23,21 @@ export default function Home() {
     <div className="overflow-x-hidden">
       <NavBarSizeable>
         <div className="w-full max-w-7xl space-y-16 lg:space-y-24">
-          <FadeUp amount={0.75}>
+          {/* blur={false}: these wrappers span whole viewports, where animating
+              a blur filter repaints far too much per frame.
+              Low `amount` values matter here — these sections are taller than a
+              phone viewport, so a high threshold can never be met and the
+              section would stay at opacity 0 forever. */}
+          <FadeUp amount={0.15} blur={false}>
             <Hero />
           </FadeUp>
-          <FadeUp amount={0.45}>
+          <FadeUp amount={0.15} blur={false}>
             <Experience />
           </FadeUp>
-          <FadeUp amount={0.15}>
+          <FadeUp amount={0.15} blur={false}>
             <Projects />
           </FadeUp>
-          <FadeUp amount={0.25}>
+          <FadeUp amount={0.15} blur={false}>
             <ContactSection />
           </FadeUp>
         </div>
