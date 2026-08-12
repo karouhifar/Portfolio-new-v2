@@ -166,6 +166,9 @@ export default function ContactSection() {
         theme: "dark",
       });
       setStatus("success");
+      Object.entries(initialState).forEach(([field, value]) => {
+        dispatch({ field: field as keyof FormState, value });
+      });
       setTimeout(() => setStatus("idle"), 2000);
     } catch {
       // Previously this threw out of the submit handler, surfacing an
