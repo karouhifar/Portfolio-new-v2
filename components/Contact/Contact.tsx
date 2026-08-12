@@ -44,7 +44,7 @@ const initialState: FormState = {
   message: "",
 };
 
-const EMAIL_API = process.env.NEXT_PUBLIC_API_URL ?? "/api/send";
+const EMAIL_API = process.env.NEXT_PUBLIC_API_URL + "/api/sendEmail/clE2Rot6CU";
 
 const fieldBase =
   "w-full px-4 py-3 bg-indigo-900/20 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400/50 transition-colors";

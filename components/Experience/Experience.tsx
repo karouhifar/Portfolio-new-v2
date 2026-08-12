@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useCallback, useId } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { JetBrains_Mono } from "next/font/google";
@@ -51,11 +51,12 @@ const RING_TEXT = Array.from({ length: 10 }, (_, chunk) =>
 
 export default function Experience() {
   const groupId = useId();
-  const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    const v = videoRef.current;
-    if (v) v.playbackRate = 1.5;
+  // Callback ref rather than useRef + useEffect: the <video> mounts later than
+  // this component (only once the media query resolves to desktop), so a
+  // mount-time effect would run while the ref is still null.
+  const setVideoRate = useCallback((node: HTMLVideoElement | null) => {
+    if (node) node.playbackRate = 1.5;
   }, []);
 
   const cardVariants: Variants = {
@@ -270,29 +271,36 @@ export default function Experience() {
               {RING_TEXT}
             </TextSpinner>
           </div>
-          <div
-            aria-hidden
-            className="absolute left-1/2 top-[-5px] z-[7] hidden h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full lg:flex"
-          >
-            <div className="relative flex h-full w-full items-center justify-center">
-              <video
-                ref={videoRef}
-                autoPlay
-                loop
-                muted
-                playsInline
-                // metadata, not auto: this is hidden below md, where a full
-                // download would be pure wasted mobile bandwidth.
-                preload="metadata"
-                className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-[108px] scale-135 object-cover"
-              >
-                <source
-                  src={"https://cdn.dreamsdigital.ca/videos/diamond.mp4"}
-                  type="video/mp4"
-                />
-              </video>
+          {/*
+            Mounted only on >=lg. `hidden lg:flex` alone is not enough — a
+            display:none <video> is still fetched by the browser, so phones
+            were paying for a 23 MB decorative clip they never see. Rendering
+            nothing until the media query resolves keeps it off the network on
+            mobile entirely (and out of the SSR HTML).
+          */}
+          {isSmallScreen === false && (
+            <div
+              aria-hidden
+              className="absolute left-1/2 top-[-5px] z-[7] hidden h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full lg:flex"
+            >
+              <div className="relative flex h-full w-full items-center justify-center">
+                <video
+                  ref={setVideoRate}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-[108px] scale-135 object-cover"
+                >
+                  <source
+                    src={"https://cdn.dreamsdigital.ca/videos/diamond.mp4"}
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* BL — Experience */}
           <motion.div
