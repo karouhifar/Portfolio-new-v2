@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import { motion, Variants } from "motion/react";
 import { FaGithub, FaLinkedin, FaMedium } from "react-icons/fa6";
 import { IconType } from "react-icons";
@@ -125,6 +125,8 @@ export default function ContactSection() {
   );
 
   const [state, dispatch] = useReducer(formReducer, initialState);
+
+  const hasCalledHealthCheck = useRef(false);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -290,7 +292,10 @@ export default function ContactSection() {
                             whileTap={{ scale: 0.96 }}
                             className="grid h-12 w-12 place-items-center rounded-full border border-neutral-500/50 bg-white/5 text-neutral-100 transition hover:border-blue-500/50 hover:text-blue-300 sm:h-14 sm:w-14"
                           >
-                            <Icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden />
+                            <Icon
+                              className="h-5 w-5 sm:h-6 sm:w-6"
+                              aria-hidden
+                            />
                           </motion.a>
                         </li>
                       ))}
@@ -321,6 +326,17 @@ export default function ContactSection() {
                     placeholder="Your full name"
                     required
                     value={state.firstName}
+                    onFocus={() => {
+                      if (!hasCalledHealthCheck.current) {
+                        hasCalledHealthCheck.current = true;
+                        fetch(process.env.NEXT_PUBLIC_API_URL + "/health", {
+                          method: "GET",
+                          keepalive: true,
+                        }).catch(() => {
+                          console.error("Failed to fetch health check");
+                        });
+                      }
+                    }}  
                     onChange={(e) =>
                       dispatch({
                         field: "firstName",
